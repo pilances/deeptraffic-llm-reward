@@ -6,3 +6,6 @@ __pycache__/
 build/
 dist/
 
+# Local archive of the original upstream README (macOS working copy only)
+README.mit.md
+

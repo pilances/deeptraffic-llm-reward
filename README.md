@@ -1,53 +1,66 @@
 
 
-# DeepTraffic: MIT Deep Reinforcement Learning Competition
+# DeepTraffic LLM Reward
 
-[DeepTraffic](https://selfdrivingcars.mit.edu/deeptraffic) - [Visualization](https://selfdrivingcars.mit.edu/deeptraffic-visualization) - [Leaderboard](https://selfdrivingcars.mit.edu/deeptraffic-leaderboard) - [Documentation](https://selfdrivingcars.mit.edu/deeptraffic-documentation) - [Paper](https://arxiv.org/abs/1801.02805) - [MIT Deep Learning](https://deeplearning.mit.edu/) [ [GitHub](https://github.com/lexfridman/mit-deep-learning) | [Website](https://deeplearning.mit.edu/) ]
+A research sandbox for comparing rule-based, DQN, and language-model policies in a small, headless traffic environment inspired by MIT's DeepTraffic.
 
-DeepTraffic is a deep reinforcement learning competition hosted as part of the [MIT Deep Learning](https://deeplearning.mit.edu) courses. The goal is to create a neural network that drives a vehicle (or multiple vehicles) as fast as possible through dense highway traffic. Top 10 submissions are listed on the  [leaderboard](https://selfdrivingcars.mit.edu/deeptraffic-leaderboard/) and you'll be able to [visualize](https://selfdrivingcars.mit.edu/deeptraffic-visualization/) your submission in the following way:
+## What this project contains
 
-![DeepTraffic visualization](images/deeptraffic-visualization-example.gif)
+The original MIT DeepTraffic website and its complete browser simulator are not part of this repository. The Python code here is a documented Gymnasium-compatible reconstruction, not a bit-for-bit port or a reproduction of the MIT leaderboard.
 
-If you find the work useful in your research, please cite the [DeepTraffic paper](https://arxiv.org/abs/1801.02805):
+The current environment provides:
 
-```bibtex
-@inproceedings{fridman2018deeptraffic,
-author = {Lex Fridman and Jack Terwilliger and Benedikt Jenik},
-title = {DeepTraffic: Crowdsourced Hyperparameter Tuning of Deep Reinforcement Learning Systems for Multi-Agent Dense Traffic Navigation},
-booktitle = {Neural Information Processing Systems (NIPS 2018) Deep Reinforcement Learning Workshop}
-year = {2018},
-url = {http://arxiv.org/abs/1801.02805},
-doi = {10.5281/zenodo.2530457}
-archivePrefix = {arXiv},
-}
+- a seven-lane highway with 20 vehicles;
+- a `(3, 10)` ego-relative observation grid;
+- five discrete actions: accelerate, decelerate, move left, move right, and maintain speed;
+- collision-avoidance safety overrides and randomized vehicle respawning;
+- deterministic seeding for repeatable experiments; and
+- a speed-based reward derived from the ego vehicle's speed.
+
+The exact assumptions, observation and action semantics, reward, episode settings, and known limitations are documented in [`docs/environment_spec.md`](docs/environment_spec.md).
+
+## Project layout
+
+```text
+src/deeptraffic_llm_reward/  Environment and example policies
+scripts/run_smoke.py         Reproducible policy smoke test
+tests/                       Environment and dynamics tests
+docs/environment_spec.md     Environment contract and assumptions
+network_basic.js             Original MIT DeepTraffic example network
 ```
 
-To get started right away, this repository provides a code snippet to insert into the code box on the [DeepTraffic site](https://selfdrivingcars.mit.edu/deeptraffic/). We'll add additional agents  as the course progresses:
+## Installation
 
-**network_basic.js**: A basic network that achieves ~66.8mph.
-
-## Local Python reimplementation (this project)
-
-The `src/deeptraffic_llm_reward` package adds a small, headless,
-Gymnasium-compatible environment for the DQN/LLM comparison. The original
-repository does not contain the retired website's complete simulator, so the
-Python v0.2 is a documented reconstruction rather than a bit-for-bit port.
-It uses continuous vehicle rectangles, 30 simulation frames per policy decision,
-ego-relative motion, and randomized respawning at the opposite boundary.
-Historical v0.1 smoke scores (including 70.699 mph) are not comparable.
-See [`docs/environment_spec.md`](docs/environment_spec.md) for the exact state,
-action, reward, evaluation, reproducibility, and assumption contract.
-
-Setup and verification:
+Python 3.11 or newer is recommended.
 
 ```bash
 python3 -m venv .venv
 .venv/bin/python -m pip install -e '.[dev]'
+```
+
+## Verify the environment
+
+Run the test suite:
+
+```bash
 .venv/bin/python -m pytest
+```
+
+Run a short smoke test with the included rule-based policy:
+
+```bash
 .venv/bin/python scripts/run_smoke.py --policy rule --seeds 3 --frames 10000
 ```
 
-And now let's return to the problem of traffic:
+The smoke test is a technical check of this reconstruction. Its score must not be interpreted as a DQN/LLM benchmark or compared directly with historical MIT DeepTraffic scores.
+
+## Research status
+
+This is an experimental foundation for future DQN and LLM-policy work. The simulator assumptions should be validated before using results as scientific baselines. No trained DQN or LLM policy is included yet.
+
+## License and attribution
+
+The upstream MIT DeepTraffic material is retained under the terms in [`LICENSE`](LICENSE). The Python reconstruction and its documentation are provided in this repository for research and experimentation.
 
 ## Problem Statement: Traffic is Terrible
 
