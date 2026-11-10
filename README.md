@@ -26,6 +26,27 @@ To get started right away, this repository provides a code snippet to insert int
 
 **network_basic.js**: A basic network that achieves ~66.8mph.
 
+## Local Python reimplementation (this project)
+
+The `src/deeptraffic_llm_reward` package adds a small, headless,
+Gymnasium-compatible environment for the DQN/LLM comparison. The original
+repository does not contain the retired website's complete simulator, so the
+Python v0.2 is a documented reconstruction rather than a bit-for-bit port.
+It uses continuous vehicle rectangles, 30 simulation frames per policy decision,
+ego-relative motion, and randomized respawning at the opposite boundary.
+Historical v0.1 smoke scores (including 70.699 mph) are not comparable.
+See [`docs/environment_spec.md`](docs/environment_spec.md) for the exact state,
+action, reward, evaluation, reproducibility, and assumption contract.
+
+Setup and verification:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -e '.[dev]'
+.venv/bin/python -m pytest
+.venv/bin/python scripts/run_smoke.py --policy rule --seeds 3 --frames 10000
+```
+
 And now let's return to the problem of traffic:
 
 ## Problem Statement: Traffic is Terrible
