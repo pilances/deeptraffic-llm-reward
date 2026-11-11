@@ -1,78 +1,79 @@
+import json
+import shutil
+import subprocess
 import numpy as np
 import pytest
+from gymnasium.utils.env_checker import check_env
+from deeptraffic_llm_reward import DeepTrafficConfig, DeepTrafficEnv
+from deeptraffic_llm_reward.backend import backend_root
 
-from deeptraffic_llm_reward import Action, DeepTrafficConfig, DeepTrafficEnv
-from deeptraffic_llm_reward.policies import RandomPolicy, RuleBasedPolicy
+def test_gym_and_lifecycle():
+    env = DeepTrafficEnv(DeepTrafficConfig(episode_frames=32))
+    try:
+        check_env(env, skip_render_check=True)
+        obs, info = env.reset(seed=0)
+        assert obs.shape == (315,)
+        assert info['controlled_vehicles'] == 11
+        assert info['agent_id'] == 0
+        _, _, _, _, info = env.step(1)
+        assert info['agent_id'] == 1
+        assert info['frame'] == 3
+        env.reset(seed=2)  # close a worker suspended inside the callback
+    finally:
+        env.close()
+    assert env._thread is None
 
+@pytest.mark.parametrize('others', [0, 4, 10])
+def test_adapter_uses_exact_callback_observation_and_actions(others):
+    env = DeepTrafficEnv(DeepTrafficConfig(other_agents=others, episode_frames=100))
+    reference = env._new_engine()
+    reference.r = reference.t = 0
+    reference.reset()
+    states = []
+    actions = [1, 3, 2, 4, 0]
+    def policy(obs, reward):
+        states.append(np.asarray(obs, dtype=np.float32))
+        return actions[(len(states)-1) % len(actions)]
+    total = 0.0
+    for _ in range(100):
+        reference.V(policy)
+        total += sum(max(0, c.c*c.a)*20 for c in reference.z[:others+1])/(others+1)
+    try:
+        obs, _ = env.reset(seed=0)
+        rewards = 0.0
+        for i, expected in enumerate(states):
+            np.testing.assert_array_equal(obs, expected)
+            obs, reward, terminated, truncated, info = env.step(actions[i % 5])
+            rewards += reward
+            assert not terminated
+            assert truncated == (i == len(states)-1)
+        assert info['episode_mean_speed_mph'] == pytest.approx(total/100)
+        assert rewards == pytest.approx(total/80)
+        np.testing.assert_array_equal(
+            [[c.x, c.y, c.a, c.c] for c in env._eng.z],
+            [[c.x, c.y, c.a, c.c] for c in reference.z])
+    finally:
+        env.close()
 
-def test_reset_matches_observation_contract() -> None:
-    env = DeepTrafficEnv()
-    observation, info = env.reset(seed=7)
+@pytest.mark.skipif(shutil.which('node') is None, reason='Node required for JS parity')
+@pytest.mark.parametrize('others', [0, 10])
+def test_evaluator_matches_javascript(others):
+    args = ['node', str(backend_root()/'reference/node_ref/run_ref.js'), 'eval',
+        '--policy=accel', '--runs=3', '--frames=2000', '--det=true',
+        '--lanes-side=3', '--patches-ahead=40', '--patches-behind=5', f'--other-agents={others}']
+    result = subprocess.run(args, capture_output=True, text=True, check=True)
+    js = json.loads(result.stdout)
+    env = DeepTrafficEnv(DeepTrafficConfig(other_agents=others))
+    py = env.evaluate(lambda obs: 1, runs=3)
+    assert py['median'] == pytest.approx(js['median'], abs=1e-9)
+    assert py['mean'] == pytest.approx(js['mean'], abs=1e-9)
 
-    assert observation.shape == (3, 10)
-    assert observation.dtype == np.float32
-    assert env.observation_space.contains(observation)
-    assert info["step"] == 0
-    assert len(env.vehicles) == 20
-
-
-def test_same_seed_and_actions_are_reproducible() -> None:
-    first = DeepTrafficEnv(DeepTrafficConfig(episode_steps=20))
-    second = DeepTrafficEnv(DeepTrafficConfig(episode_steps=20))
-    first_observation, _ = first.reset(seed=123)
-    second_observation, _ = second.reset(seed=123)
-    np.testing.assert_array_equal(first_observation, second_observation)
-
-    actions = [0, 4, 2, 3, 1] * 4
-    for action in actions:
-        first_step = first.step(action)
-        second_step = second.step(action)
-        np.testing.assert_array_equal(first_step[0], second_step[0])
-        assert first_step[1:] == second_step[1:]
-
-
-def test_invalid_action_is_rejected() -> None:
-    env = DeepTrafficEnv()
-    env.reset(seed=1)
-    with pytest.raises(ValueError):
-        env.step(5)
-
-
-def test_out_of_road_lane_change_is_overridden() -> None:
-    env = DeepTrafficEnv()
-    env.reset(seed=2)
-    env._cars[0].x = 0.0
-    env._cars[0].target_lane = 0
-
-    _, _, _, _, info = env.step(int(Action.CHANGE_LEFT))
-
-    assert env.vehicles[0].target_lane == 0
-    assert info["requested_action"] == "CHANGE_LEFT"
-    assert info["action_applied"] == "MAINTAIN"
-    assert info["safety_override"] is True
-
-
-def test_truncation_and_mean_speed_are_reported() -> None:
-    env = DeepTrafficEnv(DeepTrafficConfig(episode_steps=3))
-    observation, _ = env.reset(seed=3)
-    policy = RuleBasedPolicy()
-
-    for _ in range(3):
-        observation, reward, terminated, truncated, info = env.step(
-            policy.act(observation)
-        )
-
-    assert 0.0 <= reward <= 1.0
-    assert terminated is False
-    assert truncated is True
-    assert 0.0 <= info["episode_mean_speed_mph"] <= 80.0
-
-
-def test_random_policy_is_seeded() -> None:
-    observation = np.full((3, 10), 80.0, dtype=np.float32)
-    first = RandomPolicy(seed=9)
-    second = RandomPolicy(seed=9)
-    assert [first.act(observation) for _ in range(20)] == [
-        second.act(observation) for _ in range(20)
-    ]
-
+def test_invalid_action_does_not_resume_worker():
+    env = DeepTrafficEnv(DeepTrafficConfig(episode_frames=1))
+    try:
+        env.reset(seed=0)
+        with pytest.raises(ValueError):
+            env.step(9)
+        assert env.step(0)[3]
+    finally:
+        env.close()

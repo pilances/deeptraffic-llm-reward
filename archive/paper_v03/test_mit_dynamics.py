@@ -1,4 +1,4 @@
-"""Regression scenarios for the paper-only reconstruction."""
+"""Archived regression scenarios for the paper-only reconstruction."""
 import numpy as np
 import pytest
 from gymnasium.utils.env_checker import check_env

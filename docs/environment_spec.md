@@ -1,143 +1,73 @@
-# DeepTraffic environment v0.3 — paper-only
+# Environment v0.4: pinned code port, fleet objective
 
-This version uses only arXiv:1801.02805v2 as its scientific specification.
-Archived website code and the upstream README are not normative sources.
-Scores from v0.1 and v0.2 are not comparable: observation and following semantics
-changed. This implements the paper plus explicitly stated engineering choices,
-not an assertion that every simulator detail is specified by the paper.
+## Source and geometry
 
-## Sources
+Backend: Quillstacks/DeepTrafficByLLM commit
+`acd7c2c9157f5b480e15cf0bcd2c793de45c5b68`, engine.py only.
+The complete checkout is an external dependency; we do not import its training
+loop, Gym-like wrapper, LLM prompts or heuristics. `backend.py` verifies hashes.
+This replaces the former paper-only normative specification following the user's
+explicit authorization to prefer historical baseline comparability.
 
-[DeepTraffic paper v2, section 3](https://arxiv.org/html/1801.02805v2#S3)
-by Lex Fridman, Jack Terwilliger and Benedikt Jenik is the sole normative source.
-network_basic.js is retained as a historical artifact only.
+Seven lanes, 20 vehicles, 140x700 road; original sampled 15x34 footprint,
+scroll control around y=525, speed `20*c*a`, original safety scans and respawn
+at y=734/-34. Preserve JS operation order, RNG consumption and action leakage.
+The paper remains background, not the sole executable specification.
 
-Documented geometry: 140 by 700 pixels, seven lanes, twenty 20 by 40 pixel cars,
-7 by 70 grid cells. Ego nose stays at y=175. Initial speeds are 80 mph for ego
-and 65 mph for background cars. We choose a 30-frame ego decision interval;
-the paper defines configurable per-vehicle decision intervals. The paper
-specifies ego-relative longitudinal motion and gradual lateral movement.
-Exiting cars return at the opposite end with randomized speed and lane.
+## Observation and actions
 
-Empty cells are zero, following section 3.1.1. For following below four cells, the
-paper's formula halves leader speed, whereas its prose describes a
-distance-dependent reduction. We implement the explicit formula.
+Default flattened float32 vector: 7 columns x (40 ahead + 5 rear) = 315.
+Reshape as `(45, 7)`: rows far-ahead to rear, columns left to right.
+Free road is 1; off-road is 0; vehicle values are `(c*a)/100`, mph = value*2000.
+Stopped vehicles and off-road both encode zero. A policy must not assume zero
+means free. No absolute lane number or global state is added to the observation.
 
-## Transition contract
+IDs: 0 maintain, 1 accelerate, 2 decelerate, 3 left, 4 right.
+The original throttle increment is 0.02. Safety and historic shared-variable
+effects may change other vehicles when one policy action is requested.
 
-Positions are continuous floating-point pixels. x is the left edge, y the nose;
-y increases down the screen. Bodies span [x,x+20) and [y,y+40).
-Each step accepts an ego action, then integrates 30 frames:
+## Event-driven stepping
 
-1. Due background drivers choose actions (frame modulo their decision interval).
-2. x += (target_lane * lane_width - x) / decision_frames.
-3. Requested speed = individual maximum speed * persistent throttle factor.
-4. Resolve following limits from front to back.
-5. Non-ego y -= (speed - ego_speed) * pixels_per_mph_per_frame.
-6. Replace fully exited cars at the opposite boundary.
+`reset(seed)` creates a fresh engine and seeded layout, then pauses INSIDE the
+first true policy callback, after that frame's motion/safety preprocessing.
+`step(action)` supplies that callback's action and runs until the next callback
+or horizon. A thread and queues suspend the unmodified engine call stack.
+Inference latency never advances simulation time. Call close when abandoning
+an episode; reset automatically closes a previous worker; worker errors propagate.
 
-No distance or observation wraps around the screen. Respawning selects uniformly
-among safe lanes. If every lane is blocked, keep the car outside and retry.
+Ego requests at G%30=0; controlled others at G%30=3*index. With 10 others,
+vehicle 10 never satisfies that condition (30 is outside 0..29), but remains
+controlled/scored and receives leaked actions. This is preserved JS behavior.
+The engine cap is 9 at construction, 10 after reset: there really are 11
+controlled/scored cars in the default configuration, not 11 independent callbacks.
 
-## State and actions
+`info.agent_id` identifies the NEXT requesting agent, not the agent just acted.
+`info.frame` counts fully completed frames, `elapsed_frames` gives the interval.
+The returned reward is the sum of completed-frame fleet mph divided by 80 since
+the previous callback. Episode reward therefore equals total fleet mph/80 over
+all frames. This is our team reward definition, not the historical ego reward.
+No artificial reward is assigned to preprocessing before the initial action.
+Termination is false; the frame horizon causes truncation. Final obs is an ego
+snapshot; it is not a next decision and must not be used as another agent's state.
 
-IDs: 0 accelerate, 1 decelerate, 2 left, 3 right, 4 maintain.
-Throttle changes are bounded to [0,1]. Safety limits actual speed but preserves
-the throttle request. Safe lane requests change target_lane, not instantaneous x.
-action_applied reports the accepted high-level action; safety_override reports
-any rejected request or per-frame intervention.
+For a shared per-car DQN, maintain pending transitions PER AGENT and accumulate
+team rewards until that SAME agent next decides. Use elapsed simulation time for
+discounting; handle final incomplete intervals explicitly. Do not feed consecutive
+callbacks from different agents into an off-the-shelf single-agent replay buffer.
+Agent 10 has no independent decisions. This collection/training code is future work.
+For an LLM reward experiment, replace/add the training signal while evaluating
+with the unchanged fleet metric and identical scenarios/configuration.
 
-Default observation is float32 (3,10). Rows run left to right around the lane
-containing the ego center. Columns run nearest to farthest ahead of the nose's
-grid cell. Optional rear columns follow, nearest to farthest behind the bumper.
-Cells are fixed in screen coordinates. Full vehicle rectangles occupy every
-intersected cell, including two lanes during a lane change. The full grid includes
-ego; front/rear observation slices exclude its body.
-Free cells contain zero, occupied cells the occupying speed. For overlapping
-occupants we choose the minimum speed using a separate internal occupancy mask.
-Off-road cells are also zero (local padding choice).
-A stopped car, empty space and road boundary are indistinguishable in this
-scalar representation. Geometry-based safety still distinguishes them.
-Flatten row-major; normalization belongs in policies.
-The smoke rule assumes patches_behind=0 and lanes_side=1.
+## Evaluation
 
-## Safety reconstruction
+`evaluate(policy, runs=500)` creates an independent fresh engine, restores its
+deterministic RNG anchor and keeps streams across runs, matching JS reset order.
+Each run uses 2000 frames by default. For each completed frame sum
+`max(0,c*a)/(controlled count)` per car; run score is
+`floor(total/frames*2000)/100`. Report upper-middle sorted score for even run
+counts, NOT the average of the two central values. Return all run scores too.
+This protocol differs from independent `reset(seed)` episodes used in training.
 
-Adjacent-lane tests cover six cells ahead, the four-cell body, and one behind.
-Other drivers' destination lanes are reserved to prevent conflicting requests.
-Following distance uses equal reference points (noses), without subtracting the
-body length, as in the coordinate-difference equation. Because screen y grows
-downwards, use positive separation to the leader to resolve the paper's sign
-ambiguity. At four cells assign leader speed; below four assign half leader speed;
-above four retain requested speed. Assignment can raise speed above the throttle
-request, as the explicit equation states. Apply this to the nearest overlapping
-leader, front-to-back. Tolerance for equality is 1e-9 cells.
-
-Additional numerical guards reject lateral overlap and prevent forward crossing
-of the leader within a frame. These conservative guards are local additions.
-Initialization excludes pairwise same/adjacent-lane safety envelopes. Bounded
-rejection sampling restarts jammed layouts and raises on infeasible density.
-
-## Remaining assumptions and limits
-
-| Choice | Reconstruction default, not a recovered MIT constant |
-| --- | --- |
-| Motion scale | 1/60 pixels per mph per frame |
-| Ego decision interval and sensor defaults | 30 frames; 1 side lane, 10 ahead, 0 behind; local choices |
-| Throttle increment | 0.1 per action |
-| Background policy | Uniform choice of the five actions |
-| Background intervals | Seeded choice among 30,45,60 frames |
-| Respawn speed | Uniform 55–75 mph, also individual maximum |
-| Respawn throttle | 1.0 |
-| Exit / insertion | Entire body exits; safe insertion or deferred retry |
-| Observation alignment | Fixed screen grid and ordering defined above |
-| Training reward | Decision-interval mean ego speed / 80 |
-| Safety guards, positive-distance convention and layout sampler | Local interpretation |
-
-We choose the paper's single-agent case. Optional additional learned agents,
-DQN training and rendering are not implemented.
-
-## Change and compatibility notes
-
-v0.3 changes the zero/free-cell meaning and following distance relative to v0.2.
-Existing checkpoints and cached observations must not be reused without adapting
-their preprocessing and retraining. RuleBasedPolicy now treats zero as empty;
-it shares the observation ambiguity for stopped cars and boundaries.
-IDs remain local API conventions: 0 accelerate, 1 decelerate, 2 left, 3 right,
-4 maintain. They are not asserted to be paper-defined numeric labels.
-Metadata reports environment_version=0.3.0 and
-specification_source=arxiv:1801.02805v2.
-
-## Evaluation and reproducibility
-
-Default horizon: 10,000 simulation frames, 334 decisions, last interval 10 frames.
-The paper's figure caption uses 10,000 simulation steps but later prose gives
-different totals; this frame interpretation is explicit, not server parity.
-episode_mean_speed_mph weights every frame equally, including short final
-intervals. Score is the median episode mean over fixed seeds; report IQR too.
-No warm-up. safety_override_rate counts affected ego frames; rejected decisions
-count for their whole interval. Reward and evaluation score are separate.
-
-Development evaluation seeds: 0..9. Use disjoint training and final test seeds.
-Freeze policies and disable learned-policy exploration for evaluation.
-Same seed, config and actions reproduce all transitions and respawns.
-Different policies alter trajectories and spawn eligibility: same seeds do not
-guarantee identical subsequent traffic. Save version, config, seeds and policy
-with experiment results. Smoke output is printed, not persisted.
-
-Explicit legacy episode_steps=N means N times decision_frames; otherwise the
-episode_frames limit applies. The runner uses --frames. Reset after truncation.
-
-## Files and running
-
-env.py contains configuration, vehicle state, reset and transition functions.
-tests/test_mit_dynamics.py covers geometry, respawn, safety and timing.
-scripts/run_smoke.py runs seeded policies. .venv is generated, Git-ignored,
-and can be deleted and recreated using the README setup instructions.
-
-```sh
-.venv/bin/python -m pip install -e '.[dev]'
-.venv/bin/python -m pytest
-.venv/bin/python scripts/run_smoke.py --policy rule --seeds 10 --frames 10000
-.venv/bin/python scripts/run_smoke.py --policy random --seeds 10 --frames 10000
-```
+No warm-up. No wall-clock speed requirement. No LLM/DQN-specific simulation changes.
+Use disjoint development and held-out scenarios and multiple training seeds;
+the fixed historical evaluation block alone must not serve as a prompt tuning set.

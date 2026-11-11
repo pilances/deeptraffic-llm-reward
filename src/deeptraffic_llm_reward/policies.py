@@ -1,51 +1,29 @@
-"""Small policies used to smoke-test the shared environment contract."""
-
-from typing import Optional
-
+"""Non-learning controls for the JS observation encoding."""
 import numpy as np
-
 from .env import Action
 
-
 class RandomPolicy:
-    """Select actions uniformly using its own reproducible random generator."""
-
-    def __init__(self, seed: Optional[int] = None) -> None:
+    def __init__(self, seed=None):
         self._rng = np.random.default_rng(seed)
-
-    def act(self, observation: np.ndarray) -> int:
-        del observation
-        return int(self._rng.integers(0, len(Action)))
-
+    def act(self, observation):
+        return int(self._rng.integers(5))
 
 class RuleBasedPolicy:
-    """Smoke heuristic for paper observations (zero means empty).
-
-    Stopped cars and off-road cells are also zero and cannot be distinguished
-    from empty space here. Environment safety retains the full geometry.
-    """
-
-    def act(self, observation: np.ndarray) -> int:
-        if observation.ndim != 2 or observation.shape[0] != 3:
-            raise ValueError("RuleBasedPolicy expects a three-lane observation")
-
-        center = observation[1]
-        if center[0] == 0.0 or center[0] >= 75.0:
-            return int(Action.ACCELERATE)
-
-        clear_distances = np.array([self._clear_distance(row) for row in observation])
-        best_row = int(np.argmax(clear_distances))
-        if clear_distances[best_row] > clear_distances[1]:
-            if best_row == 0:
+    """Simple observation-only control; no claim of reproducing a submission."""
+    def __init__(self, lanes_side=3, patches_ahead=40, patches_behind=5):
+        self.side, self.ahead, self.behind = lanes_side, patches_ahead, patches_behind
+    def act(self, observation):
+        grid = np.asarray(observation).reshape(self.ahead+self.behind, 2*self.side+1)
+        def gap(col):
+            if col < 0 or col >= grid.shape[1]:
+                return -1
+            # Zero may be a stopped car or off-road: both conservatively blocked.
+            occupied = np.flatnonzero(grid[:self.ahead, col][::-1] < 0.5)
+            return int(occupied[0]) if len(occupied) else self.ahead
+        own, left, right = gap(self.side), gap(self.side-1), gap(self.side+1)
+        if own < 12:
+            if left > own+3 and left >= right:
                 return int(Action.CHANGE_LEFT)
-            if best_row == 2:
+            if right > own+3:
                 return int(Action.CHANGE_RIGHT)
-        if center[0] < 55.0:
-            return int(Action.DECELERATE)
-        return int(Action.MAINTAIN)
-
-    @staticmethod
-    def _clear_distance(lane: np.ndarray) -> int:
-        occupied = np.flatnonzero(lane > 0.0)
-        return int(occupied[0]) if occupied.size else int(lane.size)
-
+        return int(Action.ACCELERATE)
