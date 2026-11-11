@@ -6,7 +6,11 @@ A research sandbox for comparing rule-based, DQN, and language-model policies in
 
 ## What this project contains
 
-The original MIT DeepTraffic website and its complete browser simulator are not part of this repository. The Python code here is a documented Gymnasium-compatible reconstruction, not a bit-for-bit port or a reproduction of the MIT leaderboard.
+The Python environment v0.3 uses the [DeepTraffic paper v2](https://arxiv.org/abs/1801.02805v2) as its sole scientific specification. Archived website code is not a reference for this implementation. Unspecified details and interpretations of conflicting paper statements are documented explicitly.
+
+Empty observation cells are now zero, as defined in the paper. Following distance
+uses vehicle reference positions rather than bumper clearance. Previous v0.1/v0.2
+scores and model checkpoints are not interchangeable with this version.
 
 The current environment provides:
 

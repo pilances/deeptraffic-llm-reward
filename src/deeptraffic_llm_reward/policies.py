@@ -19,14 +19,18 @@ class RandomPolicy:
 
 
 class RuleBasedPolicy:
-    """Prefer speed, but change to a clearer adjacent lane when blocked."""
+    """Smoke heuristic for paper observations (zero means empty).
+
+    Stopped cars and off-road cells are also zero and cannot be distinguished
+    from empty space here. Environment safety retains the full geometry.
+    """
 
     def act(self, observation: np.ndarray) -> int:
         if observation.ndim != 2 or observation.shape[0] != 3:
             raise ValueError("RuleBasedPolicy expects a three-lane observation")
 
         center = observation[1]
-        if center[0] >= 75.0:
+        if center[0] == 0.0 or center[0] >= 75.0:
             return int(Action.ACCELERATE)
 
         clear_distances = np.array([self._clear_distance(row) for row in observation])
@@ -42,6 +46,6 @@ class RuleBasedPolicy:
 
     @staticmethod
     def _clear_distance(lane: np.ndarray) -> int:
-        occupied = np.flatnonzero(lane < 79.999)
+        occupied = np.flatnonzero(lane > 0.0)
         return int(occupied[0]) if occupied.size else int(lane.size)
 

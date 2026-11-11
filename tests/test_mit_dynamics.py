@@ -1,4 +1,4 @@
-"""Regression scenarios for the source-based v0.2 reconstruction."""
+"""Regression scenarios for the paper-only reconstruction."""
 import numpy as np
 import pytest
 from gymnasium.utils.env_checker import check_env
@@ -88,9 +88,9 @@ def test_observation_front_order_and_road_edges():
     obs = env._observation()
     assert obs.shape == (3, 12)
     assert (obs[0] == 0).all()
-    assert obs[1, 0] == 80  # cell 160..170
+    assert obs[1, 0] == 0  # empty cell 160..170
     assert (obs[1, 1:5] == 60).all()
-    assert (obs[1, 10:] == 80).all()
+    assert (obs[1, 10:] == 0).all()
 
 
 def test_lane_change_is_continuous():
@@ -109,12 +109,42 @@ def test_adjacent_front_side_and_rear_rectangles_block_change(y):
     assert not env._lane_change_is_safe(0, 2)
 
 
-@pytest.mark.parametrize("gap,expected", [(40, 60), (30, 30), (41, 80)])
-def test_longitudinal_safety_formula(gap, expected):
+@pytest.mark.parametrize("distance,expected", [(40, 60), (30, 30), (80, 80)])
+def test_longitudinal_safety_formula(distance, expected):
     env = isolated_env()
-    env._cars.append(car(60, 175 - 40 - gap, 60))
+    env._cars.append(car(60, 175 - distance, 60))
     env._advance_frame()
     assert env.vehicles[0].speed_mph == expected
+
+
+def test_paper_grid_empty_zero_and_fast_car_visible():
+    env = isolated_env()
+    assert (env._observation() == 0).all()
+    env._cars.append(car(60, 120, 80))
+    assert (env._observation()[1, 1:5] == 80).all()
+
+
+def test_stopped_vehicle_not_overwritten_in_grid():
+    env = isolated_env()
+    env._cars += [car(0, 100, 0), car(0, 100, 60)]
+    assert (env._occupancy_grid()[0, 10:14] == 0).all()
+
+
+def test_rule_policy_understands_paper_empty_cells():
+    from deeptraffic_llm_reward.policies import RuleBasedPolicy
+    policy = RuleBasedPolicy()
+    observation = np.zeros((3, 10), np.float32)
+    assert policy.act(observation) == Action.ACCELERATE
+    observation[1, 0] = 40
+    assert policy.act(observation) == Action.CHANGE_LEFT
+
+
+def test_paper_equation_sets_leader_speed_even_above_request():
+    env = isolated_env()
+    env._cars[0].speed_factor = 0.25
+    env._cars.append(car(60, 135, 60))
+    env._advance_frame()
+    assert env.vehicles[0].speed_mph == 60
 
 
 def test_initial_conditions_and_nonoverlap_during_rollout():

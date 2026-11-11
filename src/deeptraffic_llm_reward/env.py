@@ -1,4 +1,4 @@
-"""Frame-based reconstruction of the published DeepTraffic dynamics.
+"""Paper-only reconstruction of DeepTraffic (arXiv:1801.02805v2).
 
 See docs/environment_spec.md for sources, ambiguities and remaining assumptions.
 Coordinates: x is the left edge; y is the nose, increasing down the screen.
@@ -35,7 +35,7 @@ class DeepTrafficConfig:
     cell_length_px: float = 10.0
     vehicle_length_px: float = 40.0
     ego_nose_px: float = 175.0
-    decision_frames: int = 30
+    decision_frames: int = 30  # Local default: the paper leaves t_i configurable.
     episode_frames: int = 10_000
     # Compatibility: an explicit old episode_steps overrides episode_frames.
     episode_steps: Optional[int] = None
@@ -218,6 +218,20 @@ class DeepTrafficEnv(gym.Env):
     def _lateral_overlap(self, a, b):
         return abs(a.x - b.x) < self.config.lane_width_px - 1e-9
 
+    @staticmethod
+    def _paper_following_speed(requested_speed, leader_speed, distance_cells):
+        """Section 3.1.3 equation, using positive longitudinal separation.
+
+        The paper's signed distance conflicts with screen-y direction.
+        Use the magnitude between equal vehicle reference points, not bumpers.
+        The explicit equation takes precedence over its inconsistent prose.
+        """
+        if abs(distance_cells - 4.0) <= 1e-9:
+            return leader_speed
+        if distance_cells < 4.0:
+            return leader_speed / 2.0
+        return requested_speed
+
     def _advance_frame(self):
         c = self.config
         # Euler integration of dx/dt=(x_target-x)/T; keep rectangles separate.
@@ -241,19 +255,23 @@ class DeepTrafficEnv(gym.Env):
             car = self._cars[i]
             wanted = car.max_speed_mph * car.speed_factor
             speed = wanted
+            leaders = [self._cars[j] for j in ordered[:n]
+                       if self._lateral_overlap(car, self._cars[j])]
+            if leaders:
+                lead = max(leaders, key=lambda v: v.y)
+                distance_cells = (car.y - lead.y) / c.cell_length_px
+                speed = self._paper_following_speed(
+                    wanted, lead.speed_mph, distance_cells)
             for j in ordered[:n]:
                 lead = self._cars[j]
                 if not self._lateral_overlap(car, lead):
                     continue
                 gap = car.y - lead.y - c.vehicle_length_px
-                # Interpret four cells as bumper clearance (paper ambiguous).
-                if gap <= 4 * c.cell_length_px:
-                    cap = lead.speed_mph if gap >= 4 * c.cell_length_px - 1e-9 else lead.speed_mph / 2
-                    speed = min(speed, cap)
+                # Numerical no-crossing guard, distinct from the paper equation.
                 speed = min(speed, lead.speed_mph + max(0.0, gap) / c.pixels_per_mph_per_frame)
             car.speed_mph = max(0.0, speed)
             if i == 0:
-                ego_override |= speed < wanted - 1e-9
+                ego_override |= abs(speed - wanted) > 1e-9
         ego_speed = self._cars[0].speed_mph
         for car in self._cars[1:]:
             car.y -= (car.speed_mph - ego_speed) * c.pixels_per_mph_per_frame
@@ -284,15 +302,21 @@ class DeepTrafficEnv(gym.Env):
 
     def _occupancy_grid(self):
         c = self.config
-        grid = np.full((c.lanes, c.road_cells), c.max_speed_mph, np.float32)
-        for car in self._cars[1:]:
+        # Section 3.1.1: empty cells are zero. Track occupancy separately:
+        # a stopped car (also zero) must not be treated as an unwritten cell.
+        grid = np.zeros((c.lanes, c.road_cells), np.float32)
+        occupied = np.zeros(grid.shape, dtype=bool)
+        for car in self._cars:
             first_lane = max(0, int(np.floor(car.x / c.lane_width_px)))
             last_lane = min(c.lanes, int(np.ceil((car.x + c.lane_width_px - 1e-9) / c.lane_width_px)))
             start = max(0, int(np.floor(car.y / c.cell_length_px)))
             end = min(c.road_cells, int(np.ceil((car.y + c.vehicle_length_px) / c.cell_length_px)))
             if end > start:
-                grid[first_lane:last_lane, start:end] = np.minimum(
-                    grid[first_lane:last_lane, start:end], car.speed_mph)
+                region = np.s_[first_lane:last_lane, start:end]
+                grid[region] = np.where(
+                    occupied[region], np.minimum(grid[region], car.speed_mph),
+                    car.speed_mph)
+                occupied[region] = True
         return grid
 
     def _observation(self):
@@ -314,7 +338,8 @@ class DeepTrafficEnv(gym.Env):
 
     def _info(self, requested, applied, overridden, decision_mean):
         return {
-            "environment_version": "0.2.0",
+            "environment_version": "0.3.0",
+            "specification_source": "arxiv:1801.02805v2",
             "step": self._step_count, "frame": self._frame,
             "ego_speed_mph": float(self._cars[0].speed_mph),
             "decision_mean_speed_mph": float(decision_mean),

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "deeptraffic-llm-reward"
-version = "0.2.0"
+version = "0.3.0"
 description = "A reproducible Gymnasium reimplementation scaffold for MIT DeepTraffic"
 requires-python = ">=3.9"
 dependencies = [

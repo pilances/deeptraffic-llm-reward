@@ -1,23 +1,25 @@
-# DeepTraffic environment v0.2
+# DeepTraffic environment v0.3 — paper-only
 
-This version replaces the circular point-vehicle v0.1. Its old 70.699 mph score
-is not comparable. The complete browser simulator has not been recovered;
-leaderboard parity remains unverified.
+This version uses only arXiv:1801.02805v2 as its scientific specification.
+Archived website code and the upstream README are not normative sources.
+Scores from v0.1 and v0.2 are not comparable: observation and following semantics
+changed. This implements the paper plus explicitly stated engineering choices,
+not an assertion that every simulator detail is specified by the paper.
 
 ## Sources
 
-[MIT README](https://github.com/lexfridman/deeptraffic#deeptraffic-simulation--game),
-[paper v2, section 3](https://arxiv.org/html/1801.02805v2#S3),
-and the local network_basic.js starter configuration.
+[DeepTraffic paper v2, section 3](https://arxiv.org/html/1801.02805v2#S3)
+by Lex Fridman, Jack Terwilliger and Benedikt Jenik is the sole normative source.
+network_basic.js is retained as a historical artifact only.
 
 Documented geometry: 140 by 700 pixels, seven lanes, twenty 20 by 40 pixel cars,
 7 by 70 grid cells. Ego nose stays at y=175. Initial speeds are 80 mph for ego
-and 65 mph for background cars. Decisions occur every 30 frames. The paper
+and 65 mph for background cars. We choose a 30-frame ego decision interval;
+the paper defines configurable per-vehicle decision intervals. The paper
 specifies ego-relative longitudinal motion and gradual lateral movement.
 Exiting cars return at the opposite end with randomized speed and lane.
 
-Source contradictions: the README assigns 80 to free cells, the paper zero.
-We choose the README for policy input. For following below four cells, the
+Empty cells are zero, following section 3.1.1. For following below four cells, the
 paper's formula halves leader speed, whereas its prose describes a
 distance-dependent reduction. We implement the explicit formula.
 
@@ -49,9 +51,13 @@ Default observation is float32 (3,10). Rows run left to right around the lane
 containing the ego center. Columns run nearest to farthest ahead of the nose's
 grid cell. Optional rear columns follow, nearest to farthest behind the bumper.
 Cells are fixed in screen coordinates. Full vehicle rectangles occupy every
-intersected cell, including two lanes during a lane change. Ego is excluded.
-Free cells contain 80, occupied cells the minimum occupying speed, off-road
-cells zero. Thus an 80 mph car and empty space share a value, as in the README.
+intersected cell, including two lanes during a lane change. The full grid includes
+ego; front/rear observation slices exclude its body.
+Free cells contain zero, occupied cells the occupying speed. For overlapping
+occupants we choose the minimum speed using a separate internal occupancy mask.
+Off-road cells are also zero (local padding choice).
+A stopped car, empty space and road boundary are indistinguishable in this
+scalar representation. Geometry-based safety still distinguishes them.
 Flatten row-major; normalization belongs in policies.
 The smoke rule assumes patches_behind=0 and lanes_side=1.
 
@@ -59,9 +65,13 @@ The smoke rule assumes patches_behind=0 and lanes_side=1.
 
 Adjacent-lane tests cover six cells ahead, the four-cell body, and one behind.
 Other drivers' destination lanes are reserved to prevent conflicting requests.
-Following distance is interpreted as bumper clearance: cap to leader speed at
-four cells and half leader speed below four. Never force acceleration above
-requested speed. The paper does not uniquely establish this bumper convention.
+Following distance uses equal reference points (noses), without subtracting the
+body length, as in the coordinate-difference equation. Because screen y grows
+downwards, use positive separation to the leader to resolve the paper's sign
+ambiguity. At four cells assign leader speed; below four assign half leader speed;
+above four retain requested speed. Assignment can raise speed above the throttle
+request, as the explicit equation states. Apply this to the nearest overlapping
+leader, front-to-back. Tolerance for equality is 1e-9 cells.
 
 Additional numerical guards reject lateral overlap and prevent forward crossing
 of the leader within a frame. These conservative guards are local additions.
@@ -73,6 +83,7 @@ rejection sampling restarts jammed layouts and raises on infeasible density.
 | Choice | Reconstruction default, not a recovered MIT constant |
 | --- | --- |
 | Motion scale | 1/60 pixels per mph per frame |
+| Ego decision interval and sensor defaults | 30 frames; 1 side lane, 10 ahead, 0 behind; local choices |
 | Throttle increment | 0.1 per action |
 | Background policy | Uniform choice of the five actions |
 | Background intervals | Seeded choice among 30,45,60 frames |
@@ -81,10 +92,21 @@ rejection sampling restarts jammed layouts and raises on infeasible density.
 | Exit / insertion | Entire body exits; safe insertion or deferred retry |
 | Observation alignment | Fixed screen grid and ordering defined above |
 | Training reward | Decision-interval mean ego speed / 80 |
-| Safety guards, gap convention and layout sampler | Local reconstruction |
+| Safety guards, positive-distance convention and layout sampler | Local interpretation |
 
-Single learned agent matches otherAgents=0 in the starter. Optional additional
-learned agents, browser DQN and rendering are not implemented.
+We choose the paper's single-agent case. Optional additional learned agents,
+DQN training and rendering are not implemented.
+
+## Change and compatibility notes
+
+v0.3 changes the zero/free-cell meaning and following distance relative to v0.2.
+Existing checkpoints and cached observations must not be reused without adapting
+their preprocessing and retraining. RuleBasedPolicy now treats zero as empty;
+it shares the observation ambiguity for stopped cars and boundaries.
+IDs remain local API conventions: 0 accelerate, 1 decelerate, 2 left, 3 right,
+4 maintain. They are not asserted to be paper-defined numeric labels.
+Metadata reports environment_version=0.3.0 and
+specification_source=arxiv:1801.02805v2.
 
 ## Evaluation and reproducibility
 

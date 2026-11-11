@@ -27,7 +27,8 @@ def evaluate(policy_name: str, seeds: List[int], frames: int) -> None:
 
     print(f"policy={policy_name}")
     print(f"seeds={seeds}")
-    print("environment_version=0.2.0")
+    print(f"environment_version={info['environment_version']}")
+    print(f"specification_source={info['specification_source']}")
     print(f"frames_per_episode={frames}")
     print(f"decision_interval_frames={config.decision_frames}")
     print(f"median_mean_speed_mph={median(episode_speeds):.3f}")
