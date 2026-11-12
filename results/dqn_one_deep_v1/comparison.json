@@ -1,0 +1,134 @@
+{
+  "rule": {
+    "median_mph": 66.69303093161909,
+    "mean_mph": 66.3786773285511,
+    "iqr_mph": 9.901015807275911
+  },
+  "dqn": [
+    {
+      "training_seed": 0,
+      "median_mph": 64.38731369674446,
+      "mean_mph": 64.26372506761197,
+      "iqr_mph": 9.227162177956359,
+      "median_delta_to_rule": -2.305717234874635,
+      "paired_mean_delta": -2.1149522609391362,
+      "paired_mean_delta_ci95": [
+        -2.856870305722636,
+        -1.3785920584868019
+      ],
+      "scenario_win_fraction": 0.394
+    },
+    {
+      "training_seed": 1,
+      "median_mph": 62.1678035216111,
+      "mean_mph": 62.000391120990685,
+      "iqr_mph": 9.091222387330411,
+      "median_delta_to_rule": -4.525227410007993,
+      "paired_mean_delta": -4.378286207560415,
+      "paired_mean_delta_ci95": [
+        -5.15375923749813,
+        -3.618959901735597
+      ],
+      "scenario_win_fraction": 0.3
+    },
+    {
+      "training_seed": 2,
+      "median_mph": 63.665445556487356,
+      "mean_mph": 63.07836699534239,
+      "iqr_mph": 8.764583548223086,
+      "median_delta_to_rule": -3.0275853751317356,
+      "paired_mean_delta": -3.300310333208703,
+      "paired_mean_delta_ci95": [
+        -4.062623054318177,
+        -2.562950034422573
+      ],
+      "scenario_win_fraction": 0.338
+    }
+  ],
+  "mean_dqn_median_mph": 63.406854258280966,
+  "std_dqn_median_mph": 1.1321256330510212,
+  "evaluation_scenarios": 500,
+  "env_config": {
+    "lanes_side": 3,
+    "patches_ahead": 40,
+    "patches_behind": 5,
+    "other_agents": 0,
+    "episode_frames": 2000
+  },
+  "dqn_config": {
+    "episodes": 150,
+    "hidden": [
+      128,
+      128,
+      64,
+      64
+    ],
+    "learning_rate": 0.0003,
+    "gamma_per_decision": 0.95,
+    "reward_scale": 0.03333333333333333,
+    "replay_capacity": 30000,
+    "batch_size": 64,
+    "learning_starts": 2000,
+    "train_every": 4,
+    "target_every": 500,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.05,
+    "epsilon_decay": 30000,
+    "gradient_clip": 10.0
+  },
+  "backend_revision": "acd7c2c9157f5b480e15cf0bcd2c793de45c5b68",
+  "ci_scope": "paired scenario bootstrap conditional on each trained checkpoint; not training-seed uncertainty",
+  "architecture_comparison": {
+    "baseline_directory": "/Users/mika/Documents/01_DHBW/5_Semester/Intelligence Engineering/DeepTraffic-LLM-Reward/deeptraffic/results/dqn_one_v1",
+    "baseline_hidden": [
+      128,
+      128
+    ],
+    "new_hidden": [
+      128,
+      128,
+      64,
+      64
+    ],
+    "seeds": [
+      {
+        "training_seed": 0,
+        "baseline_median_mph": 67.09352031141003,
+        "new_median_mph": 64.38731369674446,
+        "median_delta_mph": -2.706206614665575,
+        "paired_mean_delta_mph": -2.2586515749034053,
+        "paired_mean_delta_ci95": [
+          -2.9227479731681427,
+          -1.5875973007655297
+        ],
+        "scenario_win_fraction": 0.386
+      },
+      {
+        "training_seed": 1,
+        "baseline_median_mph": 60.74820267043558,
+        "new_median_mph": 62.1678035216111,
+        "median_delta_mph": 1.4196008511755167,
+        "paired_mean_delta_mph": 1.5788367852865903,
+        "paired_mean_delta_ci95": [
+          1.0025256436215972,
+          2.1576527188861436
+        ],
+        "scenario_win_fraction": 0.586
+      },
+      {
+        "training_seed": 2,
+        "baseline_median_mph": 66.80585295959236,
+        "new_median_mph": 63.665445556487356,
+        "median_delta_mph": -3.1404074031050015,
+        "paired_mean_delta_mph": -2.8180763787666754,
+        "paired_mean_delta_ci95": [
+          -3.5496972986692485,
+          -2.0996835858802836
+        ],
+        "scenario_win_fraction": 0.378
+      }
+    ],
+    "mean_median_delta_mph": -1.4756710555316868,
+    "interpretation": "Previously inspected benchmark reused for requested architecture comparison; not a new untouched final test."
+  }
+}

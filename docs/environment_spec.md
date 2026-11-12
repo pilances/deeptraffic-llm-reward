@@ -58,8 +58,9 @@ discounting; handle final incomplete intervals explicitly. Do not feed consecuti
 callbacks from different agents into an off-the-shelf single-agent replay buffer.
 Agent 10 has no independent decisions. `MultiAgentCollector` now performs this
 per-car collection, discounted frame-reward aggregation and finite-horizon closure;
-`ReplayBuffer` stores and samples the resulting transitions. Neural-network
-updates remain future work. See multiagent.md for the complete contract.
+`ReplayBuffer` stores and samples the resulting transitions. The optional DQN
+trainer updates from completed transitions during collection; see dqn_five.md
+for the fixed five-car experiment and multiagent.md for transition semantics.
 For an LLM reward experiment, replace/add the training signal while evaluating
 with the unchanged fleet metric and identical scenarios/configuration.
 

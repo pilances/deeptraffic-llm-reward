@@ -1,0 +1,20 @@
+{
+  "mode": "eval",
+  "policy": "nop",
+  "config": {
+    "lanesSide": 6,
+    "patchesAhead": 52,
+    "patchesBehind": 0,
+    "otherAgents": 0,
+    "temporalWindow": 0
+  },
+  "runs": 500,
+  "frames": 2000,
+  "deterministic": true,
+  "median": 70.59,
+  "mean": 69.40400000000005,
+  "min": 42.8,
+  "max": 80,
+  "engine_median": null,
+  "elapsed_sec": 62.442
+}

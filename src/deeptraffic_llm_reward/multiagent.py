@@ -69,7 +69,7 @@ class MultiAgentCollector:
         self.env, self.replay = env, replay
         self.gamma_per_frame = gamma_per_frame
 
-    def collect_episode(self, policies, *, seed=0):
+    def collect_episode(self, policies, *, seed=0, on_transition=None):
         """policies: a shared callable, or {decision_agent_id: callable}."""
         if callable(policies):
             policies = {agent: policies for agent in self.env.decision_agent_ids}
@@ -86,6 +86,8 @@ class MultiAgentCollector:
             transitions.append(transition)
             if self.replay is not None:
                 self.replay.add(transition)
+            if on_transition is not None:
+                on_transition(transition)
 
         try:
             observation, info = self.env.reset(seed=seed)

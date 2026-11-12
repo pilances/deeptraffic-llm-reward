@@ -1,0 +1,79 @@
+{
+  "rule": {
+    "median_mph": 72.97722924776915,
+    "mean_mph": 72.22472703334924,
+    "iqr_mph": 4.343550731647852
+  },
+  "dqn": [
+    {
+      "training_seed": 0,
+      "median_mph": 65.43884948691223,
+      "mean_mph": 65.09233010475563,
+      "iqr_mph": 6.253139791892828,
+      "median_delta_to_rule": -7.5383797608569125,
+      "paired_mean_delta": -7.132396928593594,
+      "paired_mean_delta_ci95": [
+        -7.60257969288489,
+        -6.664247880297293
+      ],
+      "scenario_win_fraction": 0.078
+    },
+    {
+      "training_seed": 1,
+      "median_mph": 59.47715059210388,
+      "mean_mph": 58.998307277601434,
+      "iqr_mph": 8.088006045611245,
+      "median_delta_to_rule": -13.500078655665263,
+      "paired_mean_delta": -13.226419755747795,
+      "paired_mean_delta_ci95": [
+        -13.808698277391684,
+        -12.64323702647446
+      ],
+      "scenario_win_fraction": 0.024
+    },
+    {
+      "training_seed": 2,
+      "median_mph": 56.65382331184651,
+      "mean_mph": 56.74209557352829,
+      "iqr_mph": 6.132041506484718,
+      "median_delta_to_rule": -16.323405935922636,
+      "paired_mean_delta": -15.482631459820931,
+      "paired_mean_delta_ci95": [
+        -15.961568410027898,
+        -15.000050389285352
+      ],
+      "scenario_win_fraction": 0.008
+    }
+  ],
+  "mean_dqn_median_mph": 60.52327446362087,
+  "std_dqn_median_mph": 4.484969630896708,
+  "evaluation_scenarios": 500,
+  "env_config": {
+    "lanes_side": 3,
+    "patches_ahead": 40,
+    "patches_behind": 5,
+    "other_agents": 4,
+    "episode_frames": 2000
+  },
+  "dqn_config": {
+    "episodes": 150,
+    "hidden": [
+      128,
+      128
+    ],
+    "learning_rate": 0.0003,
+    "gamma_per_decision": 0.95,
+    "reward_scale": 0.03333333333333333,
+    "replay_capacity": 30000,
+    "batch_size": 64,
+    "learning_starts": 2000,
+    "train_every": 4,
+    "target_every": 500,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.05,
+    "epsilon_decay": 30000,
+    "gradient_clip": 10.0
+  },
+  "backend_revision": "acd7c2c9157f5b480e15cf0bcd2c793de45c5b68",
+  "ci_scope": "paired scenario bootstrap conditional on each trained checkpoint; not training-seed uncertainty"
+}

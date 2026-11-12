@@ -1,0 +1,9 @@
+{
+  "seed": 1,
+  "decisions": 10050,
+  "transitions": 10050,
+  "updates": 2013,
+  "training_frames": 300000,
+  "elapsed_seconds": 50.188047292,
+  "checkpoint": "final.pt"
+}

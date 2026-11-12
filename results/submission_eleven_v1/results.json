@@ -1,0 +1,95 @@
+{
+  "source_sha256": "88eeb44017b66032ea5fc099ad65ca5a3dd8e12307f95141dd797b22baacaa09",
+  "backend_revision": "acd7c2c9157f5b480e15cf0bcd2c793de45c5b68",
+  "trained_in_this_experiment": false,
+  "original_other_agents": 10,
+  "other_agents_tested": 10,
+  "controlled_cars_tested": 11,
+  "architecture": [
+    676,
+    5
+  ],
+  "observation": [
+    6,
+    52,
+    0
+  ],
+  "runs": 500,
+  "frames": 2000,
+  "protocol": "historical deterministic sequential RNG, per-episode floor, upper-middle median",
+  "supplied_score_mph": 75.85,
+  "median_delta_to_supplied": -0.04999999999999716,
+  "python_javascript_parity": true,
+  "verification_runs": 10,
+  "verification_javascript": {
+    "mode": "eval",
+    "policy": "nop",
+    "config": {
+      "lanesSide": 6,
+      "patchesAhead": 52,
+      "patchesBehind": 0,
+      "otherAgents": 10,
+      "temporalWindow": 0
+    },
+    "runs": 10,
+    "frames": 2000,
+    "deterministic": true,
+    "median": 75.94,
+    "mean": 75.76599999999999,
+    "min": 74.48,
+    "max": 76.64,
+    "engine_median": null,
+    "elapsed_sec": 2.548
+  },
+  "evaluation": {
+    "median": 75.94,
+    "mean": 75.76599999999999,
+    "runs": [
+      75.94,
+      75.52,
+      76.64,
+      75.01,
+      76.24,
+      76.37,
+      75.82,
+      75.1,
+      74.48,
+      76.54
+    ],
+    "frames": 2000,
+    "controlled_vehicles": 11,
+    "decision_agent_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "backend_revision": "acd7c2c9157f5b480e15cf0bcd2c793de45c5b68"
+  },
+  "javascript": {
+    "mode": "eval",
+    "policy": "nop",
+    "config": {
+      "lanesSide": 6,
+      "patchesAhead": 52,
+      "patchesBehind": 0,
+      "otherAgents": 10,
+      "temporalWindow": 0
+    },
+    "runs": 500,
+    "frames": 2000,
+    "deterministic": true,
+    "median": 75.8,
+    "mean": 75.54058000000002,
+    "min": 65.49,
+    "max": 77.59,
+    "engine_median": null,
+    "elapsed_sec": 128.045
+  }
+}

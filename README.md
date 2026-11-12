@@ -62,7 +62,8 @@ The historical runner is intentionally a separate, non-Gymnasium interface.
 Do not use `evaluate_starter.py` as a template for new agents: regular agents
 must use `DeepTrafficEnv`, whose `info['reward_objective']` is
 `fleet_speed_integral`, or declare and test another research objective explicitly.
-LLM feedback training and neural-network updates on multiagent replay remain future work.
+The shared-policy multiagent DQN trainer is available via the optional `rl`
+dependency. LLM feedback training remains future work.
 
 ## Multiple controlled cars in one world
 
@@ -76,6 +77,21 @@ LLM feedback training and neural-network updates on multiagent replay remain fut
 engine's actual decision IDs. Eleven controlled/scored cars have only ten
 independent callback owners in the native JS engine; this limitation is exposed
 explicitly. See [multiagent contract, examples and tests](docs/multiagent.md).
+
+## Five-car shared DQN versus rules
+
+```sh
+.venv/bin/python -m pip install -e '.[dev,rl]'
+.venv/bin/python scripts/run_dqn_experiment.py --mode rule
+.venv/bin/python scripts/run_dqn_experiment.py --mode train --seed 0
+.venv/bin/python scripts/run_dqn_experiment.py --mode train --seed 1
+.venv/bin/python scripts/run_dqn_experiment.py --mode train --seed 2
+.venv/bin/python scripts/run_dqn_experiment.py --mode compare
+```
+
+Each DQN trains for 150 episodes; final checkpoints and the unchanged rule policy
+are tested on the same 500 held-out seeded scenarios. Results live in
+results/dqn_five_v1/. See [the fixed experiment and artifacts](docs/dqn_five.md).
 
 Our prior paper-only environment, policies, tests and documentation are preserved
 in `archive/paper_v03/` as historical source, excluded from active test discovery.
