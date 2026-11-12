@@ -28,7 +28,8 @@ Gymnasium checker, reset/close lifecycle, invalid action handling, and independe
 Python-vs-Node evaluation for 1 and 11 controlled cars. Upstream's 18 tests are
 also invoked from our suite; absence of Node does not count as full acceptance.
 
-Migration verification: 8 project tests passed (including the nested 18-test
+Migration verification originally recorded 8 project tests. The current suite
+passes 9 project tests (including the nested 18-test
 upstream suite). Smoke evaluation, 10 sequential deterministic runs x 2000 frames,
 11 controlled cars: our observation-only rule median 76.38 mph; maintain-only
 median 59.82 mph. These small-sample controls validate integration, not a claim

@@ -43,7 +43,22 @@ with DeepTrafficEnv() as env:
 The Gym adapter is an alternating-agent interface, not a ready-made independent
 single-agent DQN training loop. See [the transition contract](docs/environment_spec.md)
 before constructing replay transitions. Evaluation uses the JS scoring protocol
-independently of the training reward. No DQN or LLM training is implemented here yet.
+independently of the training reward. The historical single-car starter can now
+be trained with original ConvNetJS on the Python engine:
+
+```sh
+.venv/bin/python scripts/evaluate_starter.py --seed 0 --runs 500
+.venv/bin/python scripts/verify_starter.py --seed 0 --runs 500
+```
+
+Repeat the first command with seeds 1 and 2 for independent training replicates.
+This uses unchanged `network_basic.js` and its historical ego reward, not the
+new team reward. Results and exported weights go to `results/starter/`.
+These are generated artifacts and can be regenerated with the same commands.
+`starter_brain.js` runs the original ConvNetJS learner in Node; `evaluate_starter.py`
+feeds it the Python engine's exact decision observations and historical rewards.
+Frozen weights are evaluated in Python, with a separate JS cross-check.
+LLM feedback training and the multiagent replay collector remain future work.
 
 Our prior paper-only environment, policies, tests and documentation are preserved
 in `archive/paper_v03/` as historical source, excluded from active test discovery.
