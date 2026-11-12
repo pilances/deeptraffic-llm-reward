@@ -10,7 +10,11 @@ from pathlib import Path
 import subprocess
 import time
 import numpy as np
-from deeptraffic_llm_reward import DeepTrafficConfig, DeepTrafficEnv
+from deeptraffic_llm_reward import (
+    DeepTrafficConfig,
+    DeepTrafficEnv,
+    HistoricalStarterRunner,
+)
 from deeptraffic_llm_reward.backend import backend_root, REVISION
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -49,8 +53,7 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
     cfg = DeepTrafficConfig(lanes_side=1, patches_ahead=10, patches_behind=0,
         other_agents=0, episode_frames=2000)
-    env = DeepTrafficEnv(cfg)
-    eng = env._new_engine()
+    trainer = HistoricalStarterRunner()
     proc = subprocess.Popen(['node', str(ROOT/'scripts/starter_brain.js'),
         str(backend_root()), str(ROOT/'network_basic.js'), str(args.seed)],
         stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True, bufsize=1)
@@ -63,29 +66,25 @@ def main():
         return json.loads(line)
     start = time.monotonic()
     try:
-        # Original train_webworker: totalFrames=30*iterations;
-        # numRuns=totalFrames/100000+1, with JS integer loop boundaries.
-        total_frames = 30*args.iterations
-        n_runs = total_frames/100000+1
-        frames_per_run = int(np.ceil(total_frames/n_runs))
-        # Training randomness is explicitly seeded; original webworker was not.
-        rng = np.random.default_rng(args.seed)
-        request({'op':'seed', 'seed':int(rng.integers(10000000))})
-        eng.r, eng.t = map(int, rng.integers(10000000, size=2))
-        decisions = 0
+        # Training randomness is explicitly seeded; original browser training was not.
         def learn(state, reward):
-            nonlocal decisions
-            decisions += 1
             return request({'op':'learn', 'state':state, 'reward':reward})
-        for i in range(int(np.ceil(n_runs))):
-            eng.reset()
-            for _ in range(frames_per_run):
-                eng.V(learn)
-            print(f'seed={args.seed} training block {i+1}/{int(np.ceil(n_runs))}, decisions={decisions}', flush=True)
+        def reset_brain_seed(seed):
+            request({'op':'seed', 'seed':seed})
+        def progress(block, blocks, decisions):
+            print(f'seed={args.seed} training block {block}/{blocks}, decisions={decisions}', flush=True)
+        training = trainer.train(
+            learn,
+            reset_brain_seed,
+            iterations=args.iterations,
+            seed=args.seed,
+            progress=progress,
+        )
         checkpoint = request({'op':'export'})
         policy = StarterPolicy(checkpoint['net'])
         # Independently verify the Python forward pass against original JS.
-        probes = [eng.ego_state()] + rng.uniform(0, 1, (100, 30)).tolist()
+        rng = np.random.default_rng(args.seed)
+        probes = [training.final_observation] + rng.uniform(0, 1, (100, 30)).tolist()
         max_error = 0.0
         for state in probes:
             js = request({'op':'q', 'state':state})
@@ -99,7 +98,8 @@ def main():
         proc.stdin.close()
         proc.wait()
     print(f'seed={args.seed} evaluating {args.runs} x 2000 frames', flush=True)
-    score = env.evaluate(policy, runs=args.runs)
+    evaluation_env = DeepTrafficEnv(cfg)
+    score = evaluation_env.evaluate(policy, runs=args.runs)
     js_score = None
     if args.verify_js:
         submission = args.out/f'seed_{args.seed}_submission.js'
@@ -113,9 +113,12 @@ def main():
         assert abs(js_score['median']-score['median']) < 1e-9, (js_score, score)
         assert abs(js_score['mean']-score['mean']) < 1e-9, (js_score, score)
     report = {'training_seed':args.seed, 'iterations_requested':args.iterations,
-        'decisions':decisions, 'training_frames':int(np.ceil(n_runs))*frames_per_run,
-        'training_blocks':int(np.ceil(n_runs)), 'frames_per_training_block':frames_per_run,
-        'reward':'historical engine callback (N-60)/20, ego only',
+        'decisions':training.decisions, 'training_frames':training.training_frames,
+        'training_blocks':training.training_blocks,
+        'frames_per_training_block':training.frames_per_training_block,
+        'training_interface':trainer.interface,
+        'training_reward_objective':trainer.reward_objective,
+        'evaluation_objective':'episode mean speed; one controlled car',
         'backend_revision':REVISION, 'network_sha256':hashlib.sha256((ROOT/'network_basic.js').read_bytes()).hexdigest(),
         'checkpoint':str(checkpoint_path), 'age':checkpoint['age'], 'epsilon':checkpoint['epsilon'],
         'max_forward_error':max_error, 'evaluation':score, 'javascript_verification':js_score,

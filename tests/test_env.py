@@ -14,6 +14,7 @@ def test_gym_and_lifecycle():
         obs, info = env.reset(seed=0)
         assert obs.shape == (315,)
         assert info['controlled_vehicles'] == 11
+        assert info['reward_objective'] == 'fleet_speed_integral'
         assert info['agent_id'] == 0
         _, _, _, _, info = env.step(1)
         assert info['agent_id'] == 1

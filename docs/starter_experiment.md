@@ -55,7 +55,9 @@ The previously discussed 40 mph is not the reference stated for this file.
   Learning continues after exploration reaches zero, as in ConvNetJS.
 - Training callback calls backward(previous reward) then forward(current state).
   The engine supplies historical `(N-60)/20`. We deliberately bypass the new
-  Gym adapter's fleet reward for this historical reproduction.
+  Gym adapter's fleet reward for this historical reproduction. A dedicated
+  non-Gymnasium `HistoricalStarterRunner` now makes that distinction explicit;
+  the script no longer reaches through `DeepTrafficEnv._new_engine()`.
 - lanesSide=1, patchesAhead=10, patchesBehind=0, otherAgents=0.
 - Original train_webworker schedule: 30*30000 = 900000 frames, 10 blocks of
   90000 frames, 30000 policy decisions. Network and replay persist across resets.
@@ -92,3 +94,21 @@ exact integral 30000-iteration schedule above.
 
 The source-provenance limitations in quillstacks_audit.md still apply. A close
 score would support empirical consistency, not prove historical engine identity.
+
+## Reward-contract review
+
+The reported criticism correctly identified two different objectives:
+`DeepTrafficEnv.step()` returns accumulated fleet-speed reward, whereas the MIT
+starter must receive the original ego-only callback reward. Changing the starter
+to fleet reward would invalidate comparison with the 66.8 mph reference, so the
+reward itself was retained. The implementation ambiguity was fixed instead:
+the historical path is a named, public, non-Gym runner; Gym info declares its
+fleet objective; tests assert both contracts. `evaluate_starter.py` must not be
+used as a Stable-Baselines3 or new-agent template.
+
+After this refactor, seed 0 was retrained for all 30,000 decisions and reevaluated
+over all 500 episodes. It reproduced the previous checkpoint byte-for-byte
+(SHA256 `1fb0088343c4269b602cdc7e1b490a723abed4242194a87392b022d0b8dae8b7`)
+and reproduced 66.32 mph median / 65.37686 mph mean exactly. The fix therefore
+changed the interface boundary and auditability, not the historical algorithm or
+its measured performance.

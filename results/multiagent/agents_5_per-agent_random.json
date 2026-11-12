@@ -1,0 +1,127 @@
+{
+  "backend_revision": "acd7c2c9157f5b480e15cf0bcd2c793de45c5b68",
+  "config": {
+    "lanes_side": 3,
+    "patches_ahead": 40,
+    "patches_behind": 5,
+    "other_agents": 4,
+    "episode_frames": 2000
+  },
+  "policy": "random",
+  "policy_mode": "per-agent",
+  "protocol": "independent reset(seed) rollout; NOT historical sequential evaluation",
+  "reward_objective": "fleet_speed_integral",
+  "gamma_per_frame": 1.0,
+  "replay_size": 1005,
+  "episodes": [
+    {
+      "seed": 0,
+      "frames": 2000,
+      "decisions_per_agent": {
+        "0": 67,
+        "1": 67,
+        "2": 67,
+        "3": 67,
+        "4": 67
+      },
+      "controlled_agent_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "decision_agent_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "episode_mean_speed_mph": 63.881637282112095,
+      "agent_mean_speed_mph": {
+        "0": 67.9549960372645,
+        "1": 60.81407603893244,
+        "2": 65.67241350722001,
+        "3": 64.82372391806754,
+        "4": 60.14297690907325
+      },
+      "episode_team_reward": 1597.0409320528017,
+      "transition_count": 335,
+      "final_transition_count": 5
+    },
+    {
+      "seed": 1,
+      "frames": 2000,
+      "decisions_per_agent": {
+        "0": 67,
+        "1": 67,
+        "2": 67,
+        "3": 67,
+        "4": 67
+      },
+      "controlled_agent_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "decision_agent_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "episode_mean_speed_mph": 68.79526182432224,
+      "agent_mean_speed_mph": {
+        "0": 67.13490354569488,
+        "1": 67.48223019704663,
+        "2": 67.23756239525339,
+        "3": 68.29641298361678,
+        "4": 73.82520000000036
+      },
+      "episode_team_reward": 1719.8815456080545,
+      "transition_count": 335,
+      "final_transition_count": 5
+    },
+    {
+      "seed": 2,
+      "frames": 2000,
+      "decisions_per_agent": {
+        "0": 67,
+        "1": 67,
+        "2": 67,
+        "3": 67,
+        "4": 67
+      },
+      "controlled_agent_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "decision_agent_ids": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "episode_mean_speed_mph": 65.91030130391495,
+      "agent_mean_speed_mph": {
+        "0": 72.76753263465727,
+        "1": 62.67905657421599,
+        "2": 64.39525017336672,
+        "3": 60.931507615403035,
+        "4": 68.77815952193139
+      },
+      "episode_team_reward": 1647.757532597875,
+      "transition_count": 335,
+      "final_transition_count": 5
+    }
+  ],
+  "median_episode_mean_mph": 65.91030130391495
+}

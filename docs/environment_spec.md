@@ -46,6 +46,8 @@ controlled/scored cars in the default configuration, not 11 independent callback
 The returned reward is the sum of completed-frame fleet mph divided by 80 since
 the previous callback. Episode reward therefore equals total fleet mph/80 over
 all frames. This is our team reward definition, not the historical ego reward.
+The environment exposes this as `reward_objective='fleet_speed_integral'` and in
+every reset/step info dictionary. New Gymnasium agents optimize this objective.
 No artificial reward is assigned to preprocessing before the initial action.
 Termination is false; the frame horizon causes truncation. Final obs is an ego
 snapshot; it is not a next decision and must not be used as another agent's state.
@@ -54,9 +56,18 @@ For a shared per-car DQN, maintain pending transitions PER AGENT and accumulate
 team rewards until that SAME agent next decides. Use elapsed simulation time for
 discounting; handle final incomplete intervals explicitly. Do not feed consecutive
 callbacks from different agents into an off-the-shelf single-agent replay buffer.
-Agent 10 has no independent decisions. This collection/training code is future work.
+Agent 10 has no independent decisions. `MultiAgentCollector` now performs this
+per-car collection, discounted frame-reward aggregation and finite-horizon closure;
+`ReplayBuffer` stores and samples the resulting transitions. Neural-network
+updates remain future work. See multiagent.md for the complete contract.
 For an LLM reward experiment, replace/add the training signal while evaluating
 with the unchanged fleet metric and identical scenarios/configuration.
+
+The MIT starter reproduction is deliberately outside this Gym contract. Its
+public `HistoricalStarterRunner` exposes the original callback reward
+`(N-60)/20` for a single ego vehicle. It is a baseline reproduction utility,
+not a training template for new RL agents. This separation prevents silent
+reward changes while preserving the historical result.
 
 ## Evaluation
 

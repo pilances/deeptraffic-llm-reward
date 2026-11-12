@@ -58,7 +58,24 @@ These are generated artifacts and can be regenerated with the same commands.
 `starter_brain.js` runs the original ConvNetJS learner in Node; `evaluate_starter.py`
 feeds it the Python engine's exact decision observations and historical rewards.
 Frozen weights are evaluated in Python, with a separate JS cross-check.
-LLM feedback training and the multiagent replay collector remain future work.
+The historical runner is intentionally a separate, non-Gymnasium interface.
+Do not use `evaluate_starter.py` as a template for new agents: regular agents
+must use `DeepTrafficEnv`, whose `info['reward_objective']` is
+`fleet_speed_integral`, or declare and test another research objective explicitly.
+LLM feedback training and neural-network updates on multiagent replay remain future work.
+
+## Multiple controlled cars in one world
+
+```sh
+.venv/bin/python scripts/run_multiagent.py --agents 5 --policy rule --episodes 3
+.venv/bin/python scripts/run_multiagent.py --agents 5 --policy random --policy-mode per-agent --episodes 3
+```
+
+`MultiAgentCollector` now builds same-car transitions and stores them in a bounded
+`ReplayBuffer`. Use shared policies or a mapping of separate policies to the
+engine's actual decision IDs. Eleven controlled/scored cars have only ten
+independent callback owners in the native JS engine; this limitation is exposed
+explicitly. See [multiagent contract, examples and tests](docs/multiagent.md).
 
 Our prior paper-only environment, policies, tests and documentation are preserved
 in `archive/paper_v03/` as historical source, excluded from active test discovery.
