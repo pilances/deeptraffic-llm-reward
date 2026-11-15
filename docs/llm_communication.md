@@ -1,8 +1,9 @@
 # LLM communication
 
 The separately implemented strict response parser and explicit fallback are
-documented in [llm_action.md](llm_action.md). They are not yet wired to this
-client or the simulation.
+documented in [llm_action.md](llm_action.md). The composition of transport,
+preparation and parsing is now implemented in [llm_policy.md](llm_policy.md),
+tested with a simulated client. It is not yet connected to simulation steps.
 
 `llm_client.OllamaClient` sends prepared role/content messages to Ollama's
 `POST /api/chat` endpoint. It returns the complete request and server response,
@@ -23,8 +24,10 @@ print(exchange['response']['message']['content'])
 The existing native Ollama server on this Mac already has `qwen3:8b` installed.
 No container or download is needed. Defaults: localhost:11434, temperature 0,
 seed 42, thinking off, JSON output, 64 output tokens, context 8192, non-streaming.
-Each call contains only explicitly supplied messages. The model is unloaded
-after the reply (`keep_alive=0`) to release memory. These settings aid repeatability
+Each call contains only explicitly supplied messages. By default, the model is unloaded
+after the reply (`keep_alive=0`) to release memory. Repeated evaluations can set
+`OllamaClient(keep_alive_seconds=300)` to keep it loaded for five minutes between
+requests, without changing decoding settings. These settings aid repeatability
 but do not guarantee identical output across model/runtime/hardware versions.
 
 The live smoke command sends exactly one prompt, using a fictional 52x13 grid

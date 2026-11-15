@@ -2,7 +2,8 @@
 
 Die neue Datei `src/deeptraffic_llm_reward/llm_action.py` verarbeitet ausschließlich
 Antworttexte. Sie ruft weder Ollama noch `env.step()` auf. Der bestehende
-Kommunikationsclient bleibt unverändert. Es gibt noch keinen Policy-Adapter.
+Kommunikationsclient bleibt unverändert. Der anschließend implementierte
+Policy-Adapter ist in [llm_policy.md](llm_policy.md) beschrieben.
 
 ## Schritt 1: Text prüfen
 

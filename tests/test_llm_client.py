@@ -35,3 +35,20 @@ def test_failure_has_no_implicit_retry():
         with pytest.raises(LLMCommunicationError):
             OllamaClient().chat([{'role':'user', 'content':'state'}])
     transport.assert_called_once()
+
+
+def test_model_residency_does_not_change_decoding():
+    reply = {'done': True, 'message': {'content': '{"action":1}'}}
+    with patch('deeptraffic_llm_reward.llm_client.urlopen',
+               return_value=io.BytesIO(json.dumps(reply).encode())):
+        payload = OllamaClient(keep_alive_seconds=300).chat(
+            [{'role': 'user', 'content': 'state'}])['request']
+    assert payload['keep_alive'] == 300
+    assert payload['options'] == {'temperature': 0, 'seed': 42,
+                                  'num_predict': 64, 'num_ctx': 8192}
+
+
+@pytest.mark.parametrize('value', [-1, True, 0.5])
+def test_invalid_residency(value):
+    with pytest.raises(ValueError, match='keep_alive_seconds'):
+        OllamaClient(keep_alive_seconds=value)

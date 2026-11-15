@@ -15,6 +15,9 @@ def test_layout_round_trip_and_action_mapping():
     assert state['lane_offsets_left_to_right'] == [-1,0,1]
     assert '"0": "MAINTAIN"' in request['messages'][0]['content']
     assert '"3": "CHANGE_LEFT"' in request['messages'][0]['content']
+    assert 'deeptraffic-prompt-v2' in request['messages'][0]['content']
+    assert request['prompt_version'] == 'deeptraffic-prompt-v2'
+    assert 'RAW-STATE EXAMPLES' in request['messages'][0]['content']
     assert request == prepare_llm_request(obs.copy(), cfg)
 
 

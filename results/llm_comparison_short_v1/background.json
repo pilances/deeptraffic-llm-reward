@@ -1,0 +1,22 @@
+{
+  "pid": 93700,
+  "command": [
+    "/Users/mika/Documents/01_DHBW/5_Semester/Intelligence Engineering/DeepTraffic-LLM-Reward/deeptraffic/.venv/bin/python",
+    "-u",
+    "/Users/mika/Documents/01_DHBW/5_Semester/Intelligence Engineering/DeepTraffic-LLM-Reward/deeptraffic/scripts/evaluate_llm.py",
+    "--out",
+    "/Users/mika/Documents/01_DHBW/5_Semester/Intelligence Engineering/DeepTraffic-LLM-Reward/deeptraffic/results/llm_comparison_short_v1",
+    "--resume",
+    "--frames",
+    "200",
+    "--seeds",
+    "2000100",
+    "2000101",
+    "2000102",
+    "--checkpoint",
+    "/Users/mika/Documents/01_DHBW/5_Semester/Intelligence Engineering/DeepTraffic-LLM-Reward/deeptraffic/results/llm_comparison_short_v1/checkpoint.json"
+  ],
+  "cwd": "/Users/mika/Documents/01_DHBW/5_Semester/Intelligence Engineering/DeepTraffic-LLM-Reward/deeptraffic",
+  "started_utc": "2026-11-15T10:40:54.864291+00:00",
+  "log": "/Users/mika/Documents/01_DHBW/5_Semester/Intelligence Engineering/DeepTraffic-LLM-Reward/deeptraffic/results/llm_comparison_short_v1/background.log"
+}

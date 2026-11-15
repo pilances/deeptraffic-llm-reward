@@ -25,6 +25,11 @@ Actions are taken directly from the environment enum: maintain=0, accelerate=1,
 decelerate=2, left=3, right=4. Earlier conversational examples using a different
 numbering were incorrect; this module uses the actual engine numbering.
 
+The state schema remains `deeptraffic-state-v1`; the current system prompt is
+versioned separately as `deeptraffic-prompt-v2`. It adds clearer instructions,
+a fixed decision order, and raw-state examples. It does not add derived state
+features or change the DQN input.
+
 This module performs no HTTP requests, response parsing, action selection or
 simulation steps. It generates no files unless the caller explicitly saves the
 returned JSON. It requires no model download and changes no environment logic.

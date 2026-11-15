@@ -16,6 +16,7 @@ class OllamaClient:
     base_url: str = 'http://localhost:11434'
     model: str = 'qwen3:8b'
     timeout_seconds: float = 180.0
+    keep_alive_seconds: int = 0
 
     def __post_init__(self):
         url = urlparse(self.base_url)
@@ -23,6 +24,8 @@ class OllamaClient:
             raise ValueError('Expected an HTTP(S) server base URL')
         if not self.model.strip() or not math.isfinite(self.timeout_seconds) or self.timeout_seconds <= 0:
             raise ValueError('Require model name and finite positive timeout')
+        if type(self.keep_alive_seconds) is not int or self.keep_alive_seconds < 0:
+            raise ValueError('keep_alive_seconds must be a nonnegative integer')
 
     def chat(self, messages):
         """Send exactly one POST, returning the full response without action parsing.
@@ -36,7 +39,7 @@ class OllamaClient:
             raise ValueError('Require nonempty role/content messages')
         payload = {
             'model': self.model, 'messages': messages, 'stream': False,
-            'think': False, 'format': 'json', 'keep_alive': 0,
+            'think': False, 'format': 'json', 'keep_alive': self.keep_alive_seconds,
             'options': {'temperature': 0, 'seed': 42, 'num_predict': 64, 'num_ctx': 8192},
         }
         request = Request(self.base_url.rstrip('/')+'/api/chat',
