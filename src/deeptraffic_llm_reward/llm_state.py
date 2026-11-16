@@ -5,7 +5,7 @@ import numpy as np
 from .env import Action
 
 VERSION = 'deeptraffic-state-v1'
-PROMPT_VERSION = 'deeptraffic-prompt-v2'
+PROMPT_VERSION = 'deeptraffic-prompt-v3'
 
 
 def prepare_llm_request(observation, config):
@@ -29,37 +29,46 @@ def prepare_llm_request(observation, config):
         'grid': obs.reshape(rows, columns).tolist(),
     }
     content = json.dumps(state, sort_keys=True, separators=(',', ':'), allow_nan=False)
+    rear_rows = max(0, config.patches_behind - 1)
+    rear_visibility = (
+        'No cells behind the controlled vehicle are supplied. Rear traffic is unknown; '
+        'do not treat it as either clear or blocked. Judge lane changes from the '
+        'visible space ahead, without claiming that the unseen rear is safe.\n\n'
+        if rear_rows == 0 else
+        f'{rear_rows} rows behind the vehicle are supplied. Use them '
+        'when judging a lane change; traffic beyond the observed rows is unknown.\n\n'
+    )
     instructions = (
         f'{PROMPT_VERSION}. You control one vehicle in DeepTraffic. Choose one '
-        'action using only the supplied 676-value observation. The objective is '
-        'high average speed of the controlled fleet while avoiding unsafe lane changes. '
+        f'action using only the supplied {rows * columns}-value observation. The objective is '
+        'high average speed of the controlled fleet. '
         'The observation is unchanged and contains no extra derived features.\n\n'
         'READING THE GRID:\n'
         '- The JSON grid is a matrix, flattened row by row in the original observation.\n'
-        '- Rows run from farthest ahead (negative longitudinal offset) toward the '
-        'vehicle and then behind (positive offset). With patches_behind=0, row 0 '
-        'is farthest ahead and the last row is nearest the vehicle.\n'
+        '- Negative longitudinal offsets run from farthest ahead toward the vehicle. '
+        'Offset 0 is at the vehicle; positive offsets, if present, are behind it.\n'
         '- Columns run left to right by relative lane offset. Offset 0 is always '
         'the controlled vehicle\'s current lane; absolute lane number is unavailable.\n'
-        '- 1.0 means free space. A value below 1.0 marks an occupied cell and '
-        'encodes that vehicle\'s speed as mph divided by 2000. Zero can mean a '
+        '- 1.0 means free space. Values strictly between 0 and 1 mark occupied '
+        'cells and encode vehicle speed as mph divided by 2000. Zero can mean a '
         'stopped vehicle or off-road space.\n'
         '- Vehicle identities, a separate ego speed and absolute lane number are '
-        'unavailable. Infer a nearby vehicle from its contiguous occupied cells.\n\n'
+        'unavailable. Do not claim to know whether another vehicle is slower than '
+        'you. Infer a nearby vehicle from its contiguous occupied cells.\n'
+        'There are safety measures in place to prevent collisions. Therefore, an action which would result '
+        'in a direct collision with another vehicle or off-road space will be ignored by the simulator.\n'
+        'However, you should still avoid choosing such actions, as they will result in a lower average speed.\n\n'
+        + rear_visibility +
         'DECISION ORDER:\n'
-        '1. Inspect the current lane ahead. If it is clear, choose ACCELERATE.\n'
-        '2. If a slower vehicle blocks the current lane, inspect both adjacent lanes.\n'
-        '3. Choose CHANGE_LEFT or CHANGE_RIGHT only when the target lane has a '
-        'sufficiently clear region ahead and behind in the grid. Prefer the safer '
-        'target lane; if both are comparable, prefer CHANGE_LEFT.\n'
-        '4. If both adjacent lanes are blocked or cannot be judged safe, choose MAINTAIN.\n'
-        '5. Choose DECELERATE only when the current lane is blocked and no safe lane '
-        'change is visible. Never change lanes merely because a lane is adjacent.\n\n'
-        'RAW-STATE EXAMPLES:\n'
-        '- Slow vehicle ahead, adjacent left region clear, adjacent right region blocked: CHANGE_LEFT.\n'
-        '- Slow vehicle ahead, adjacent right region clear, adjacent left region blocked: CHANGE_RIGHT.\n'
-        '- Slow vehicle ahead, both adjacent regions blocked or uncertain: MAINTAIN.\n'
-        '- Current lane clear ahead: ACCELERATE.\n\n'
+        '1. If the visible current lane has no nearby obstruction ahead, choose ACCELERATE.\n'
+        '2. If an occupied region is nearby ahead in the current lane, compare the '
+        'visible forward clearance of the adjacent lanes.\n'
+        '3. Choose CHANGE_LEFT or CHANGE_RIGHT when that adjacent lane is visibly '
+        'more open ahead and has no visible obstruction at the lane-change area. '
+        'Avoid a lane that appears off-road or occupied. Do not require knowledge '
+        'of traffic outside the observation.\n'
+        '4. If neither adjacent lane is visibly better, choose MAINTAIN; choose '
+        'DECELERATE if an obstruction is immediately ahead.\n\n'
         'Actions: ' + json.dumps({int(a): a.name for a in Action}, sort_keys=True) +
         '. Analyze internally and return only one JSON object with an integer action, '
         'for example {"action":0}. Do not return explanations, markdown or extra keys.'

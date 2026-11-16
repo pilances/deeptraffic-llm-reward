@@ -15,10 +15,30 @@ def test_layout_round_trip_and_action_mapping():
     assert state['lane_offsets_left_to_right'] == [-1,0,1]
     assert '"0": "MAINTAIN"' in request['messages'][0]['content']
     assert '"3": "CHANGE_LEFT"' in request['messages'][0]['content']
-    assert 'deeptraffic-prompt-v2' in request['messages'][0]['content']
-    assert request['prompt_version'] == 'deeptraffic-prompt-v2'
-    assert 'RAW-STATE EXAMPLES' in request['messages'][0]['content']
+    assert 'deeptraffic-prompt-v3' in request['messages'][0]['content']
+    assert request['prompt_version'] == 'deeptraffic-prompt-v3'
+    assert 'No cells behind the controlled vehicle are supplied' in request['messages'][0]['content']
     assert request == prepare_llm_request(obs.copy(), cfg)
+
+
+def test_no_rear_observation_is_not_described_as_visible():
+    cfg = DeepTrafficConfig(lanes_side=6, patches_ahead=52, patches_behind=0)
+    request = prepare_llm_request(np.ones(676, dtype=np.float32), cfg)
+    prompt = request['messages'][0]['content']
+    assert 'No cells behind the controlled vehicle are supplied' in prompt
+    assert 'Rear traffic is unknown' in prompt
+    assert 'a separate ego speed' in prompt
+    assert 'whether another vehicle is slower than you' in prompt
+    assert 'sufficiently clear region ahead and behind' not in prompt
+    assert 'slower vehicle blocks' not in prompt
+
+
+def test_positive_offsets_are_described_as_rear_observations():
+    cfg = DeepTrafficConfig(lanes_side=1, patches_ahead=2, patches_behind=3)
+    request = prepare_llm_request(np.ones(15, dtype=np.float32), cfg)
+    state = json.loads(request['messages'][1]['content'])
+    assert state['longitudinal_offsets'] == [-2, -1, 0, 1, 2]
+    assert '2 rows behind the vehicle are supplied' in request['messages'][0]['content']
 
 
 @pytest.mark.parametrize('obs', [[0], [float('nan')]*3, [-.1]*3, [1.1]*3])

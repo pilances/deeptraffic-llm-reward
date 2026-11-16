@@ -14,7 +14,7 @@ class LLMPolicyAdapter:
     last_record holds only the latest attempt; callers own persistent logging.
     Instances are intended for sequential calls, not concurrent use.
     """
-    def __init__(self, config, client, *, on_invalid='raise'):
+    def __init__(self, config, client, *, on_invalid='raise', prepare_request=prepare_llm_request):
         if on_invalid not in ('raise', 'maintain'):
             raise ValueError('on_invalid must be raise or maintain')
         if not callable(getattr(client, 'chat', None)):
@@ -22,6 +22,7 @@ class LLMPolicyAdapter:
         self.config = config
         self.client = client
         self.on_invalid = on_invalid
+        self.prepare_request = prepare_request
         self.last_record = None
 
     def __call__(self, observation) -> int:
@@ -32,7 +33,7 @@ class LLMPolicyAdapter:
                   'status': 'pending', 'stage': 'prepare', 'resolution': None}
         self.last_record = record
         try:
-            prepared = prepare_llm_request(observation, self.config)
+            prepared = self.prepare_request(observation, self.config)
             record['prepared'] = deepcopy(prepared)
             record['stage'] = 'chat'
             exchange = self.client.chat(prepared['messages'])

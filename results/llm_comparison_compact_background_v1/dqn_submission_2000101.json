@@ -1,0 +1,33 @@
+{
+  "seed": 2000101,
+  "frames": 200,
+  "decisions": 67,
+  "initial_state_sha256": "2f93c1bdcccfbef7c2e734ba1db015646cdfbff316c1b266dccfe181615c0159",
+  "raw_mean_speed_mph": 70.37145800864609,
+  "initial_traffic_sha256": "4aafbe243260d8660fc14b42f5e7b3a74201c2daaa0602f11ae151bcc9232ae8",
+  "score_mph": 70.37,
+  "agent_mean_speed_mph": {
+    "0": 67.81122878703681,
+    "1": 65.68188527327602,
+    "2": 68.31557890751179,
+    "3": 71.36799999999995,
+    "4": 73.592,
+    "5": 73.34259896375474,
+    "6": 46.47874616352793,
+    "7": 76.19600000000003,
+    "8": 77.05999999999999,
+    "9": 77.12,
+    "10": 77.12
+  },
+  "action_counts": {
+    "0": 1,
+    "1": 30,
+    "2": 0,
+    "3": 16,
+    "4": 20
+  },
+  "fallback_count": 0,
+  "original_decision_seconds": 0.00029300500000012386,
+  "execution_seconds": 0.05827379100000002,
+  "replayed_decisions": 0
+}

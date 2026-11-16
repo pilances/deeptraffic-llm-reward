@@ -34,6 +34,11 @@ def main():
                '--frames', str(contract['config']['episode_frames']),
                '--seeds', *map(str, contract['scenario_seeds']),
                '--checkpoint', str(output/'checkpoint.json')]
+    if contract.get('compact'):
+        cfg = contract['llm_config']
+        command += ['--compact', '--llm-lanes-side', str(cfg['lanes_side']),
+                    '--llm-patches-ahead', str(cfg['patches_ahead']),
+                    '--llm-patches-behind', str(cfg['patches_behind'])]
     environment = dict(os.environ, OPENBLAS_NUM_THREADS='1', VECLIB_MAXIMUM_THREADS='1')
     with (output/'background.log').open('ab') as log:
         process = subprocess.Popen(command, cwd=root, env=environment,

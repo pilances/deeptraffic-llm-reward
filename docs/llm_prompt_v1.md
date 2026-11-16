@@ -8,5 +8,5 @@ You control one vehicle in DeepTraffic. Choose an action to improve average spee
 ```
 
 The archived implementation is kept for provenance. New requests use the
-versioned `deeptraffic-prompt-v2`, while the raw observation and state hash
+versioned `deeptraffic-prompt-v3`, while the raw observation and state hash
 remain unchanged.

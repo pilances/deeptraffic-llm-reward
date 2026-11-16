@@ -1,5 +1,9 @@
 # LLM state preparation
 
+The raw-state interface below remains available. The new optional
+[`--compact` experiment](llm_compact.md) uses `llm_compact.prepare_compact_request`
+to send a semantic summary instead, with a separate 3/40/5 LLM observation window.
+
 `llm_state.prepare_llm_request(observation, config)` converts an existing
 Gymnasium observation into versioned system/user messages and SHA256 hashes.
 It uses only the observation, preserves all float32 values, validates shape,
@@ -26,9 +30,13 @@ decelerate=2, left=3, right=4. Earlier conversational examples using a different
 numbering were incorrect; this module uses the actual engine numbering.
 
 The state schema remains `deeptraffic-state-v1`; the current system prompt is
-versioned separately as `deeptraffic-prompt-v2`. It adds clearer instructions,
-a fixed decision order, and raw-state examples. It does not add derived state
-features or change the DQN input.
+versioned separately as `deeptraffic-prompt-v3`. For the benchmark configuration,
+it explicitly states that rear traffic and the controlled vehicle's own speed
+are unavailable. Lane-change instructions compare only visible forward space;
+they do not require a rear-clearance check that the observation cannot support.
+For configurations with `patches_behind > 1`, the prompt describes the supplied
+rear rows; offset 0 itself is at the vehicle. The prompt does not add derived
+state features or change the DQN input.
 
 This module performs no HTTP requests, response parsing, action selection or
 simulation steps. It generates no files unless the caller explicitly saves the

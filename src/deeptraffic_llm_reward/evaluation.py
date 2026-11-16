@@ -28,6 +28,9 @@ def run_seeded_episode(config, seed, policy, trace_path):
     try:
         obs, info = env.reset(seed=seed)
         initial_hash = observation_hash(obs)
+        initial_traffic_hash = hashlib.sha256(json.dumps(
+            [(car.b, car.y, car.a, car.c) for car in env._eng.z],
+            allow_nan=False).encode()).hexdigest()
         index = 0
         while True:
             context = {'seed': seed, 'index': index, 'agent_id': info['agent_id'],
@@ -73,6 +76,7 @@ def run_seeded_episode(config, seed, policy, trace_path):
         raw = info['episode_mean_speed_mph']
         result = {'seed': seed, 'frames': info['frame'], 'decisions': index,
                   'initial_state_sha256': initial_hash, 'raw_mean_speed_mph': raw,
+                  'initial_traffic_sha256': initial_traffic_hash,
                   'score_mph': math.floor(raw*100)/100,
                   'agent_mean_speed_mph': info['agent_mean_speed_mph'],
                   'action_counts': {str(a): sum(r['action'] == a for r in rows) for a in range(5)},
@@ -90,13 +94,14 @@ def summarize_matched(results, target=76.6, frames=2000):
     """Summarize only completed, paired scenarios; never silently drop failures."""
     names = list(results)
     reference = results[names[0]]
-    keys = [(r['seed'], r['frames'], r['initial_state_sha256']) for r in reference]
+    scenario_hash = lambda r: r.get('initial_traffic_sha256', r['initial_state_sha256'])
+    keys = [(r['seed'], r['frames'], scenario_hash(r)) for r in reference]
     if not keys or len({r['seed'] for r in reference}) != len(keys):
         raise ValueError('Require unique, nonempty scenarios')
     summary = {'frames': frames, 'historical_target_mph': target,
                'historical_protocol_match': False, 'policies': {}}
     for name, rows in results.items():
-        if [(r['seed'], r['frames'], r['initial_state_sha256']) for r in rows] != keys:
+        if [(r['seed'], r['frames'], scenario_hash(r)) for r in rows] != keys:
             raise ValueError('Policies were not evaluated on matching scenarios')
         if any(r['frames'] != frames for r in rows):
             raise ValueError('Unexpected episode length')
