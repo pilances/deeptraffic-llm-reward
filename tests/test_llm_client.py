@@ -48,6 +48,15 @@ def test_model_residency_does_not_change_decoding():
                                   'num_predict': 64, 'num_ctx': 8192}
 
 
+def test_constrained_actions_schema_is_sent_to_transport():
+    reply = {'done': True, 'message': {'content': '{"reason":"Open","action":"accelerate"}'}}
+    schema = {'type': 'object', 'properties': {'action': {'enum': ['accelerate', 'maintain']}}}
+    with patch('deeptraffic_llm_reward.llm_client.urlopen',
+               return_value=io.BytesIO(json.dumps(reply).encode())) as transport:
+        OllamaClient().chat([{'role': 'user', 'content': 'state'}], response_schema=schema)
+    assert json.loads(transport.call_args.args[0].data)['format'] == schema
+
+
 @pytest.mark.parametrize('value', [-1, True, 0.5])
 def test_invalid_residency(value):
     with pytest.raises(ValueError, match='keep_alive_seconds'):

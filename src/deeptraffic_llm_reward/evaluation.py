@@ -7,6 +7,7 @@ from pathlib import Path
 from time import perf_counter
 import numpy as np
 from .env import DeepTrafficEnv
+from .safety_metrics import summarize_safety
 
 
 def observation_hash(observation):
@@ -43,7 +44,8 @@ def run_seeded_episode(config, seed, policy, trace_path):
             else:
                 before = perf_counter()
                 try:
-                    action = int(policy(obs))
+                    act_with_info = getattr(policy, 'act_with_info', None)
+                    action = int(act_with_info(obs, info) if callable(act_with_info) else policy(obs))
                 except Exception as exc:
                     with path.with_suffix('.errors.jsonl').open('a') as stream:
                         stream.write(json.dumps({'context': context,
@@ -59,7 +61,10 @@ def run_seeded_episode(config, seed, policy, trace_path):
             if index < len(previous):
                 if row['after'] != after:
                     raise ValueError('Replay outcome mismatch')
+                if 'safety_events' in row and row['safety_events'] != info['safety_events']:
+                    raise ValueError('Replay safety events mismatch')
             else:
+                row['safety_events'] = info['safety_events']
                 row['after'] = after
                 with path.open('a') as stream:
                     stream.write(json.dumps(row, allow_nan=False)+'\n')
@@ -84,6 +89,8 @@ def run_seeded_episode(config, seed, policy, trace_path):
                                         for r in rows),
                   'original_decision_seconds': sum(r['latency_seconds'] for r in rows),
                   'execution_seconds': perf_counter()-started, 'replayed_decisions': len(previous)}
+        result['safety_summary'] = info['safety_summary']
+        result['safety_events'] = env._safety_events.copy()
         path.with_suffix('.json').write_text(json.dumps(result, indent=2))
         return result
     finally:
@@ -114,6 +121,9 @@ def summarize_matched(results, target=76.6, frames=2000):
             'fallback_count': sum(r['fallback_count'] for r in rows),
             'decision_seconds': sum(r['original_decision_seconds'] for r in rows),
             'action_counts': {str(a): sum(r['action_counts'][str(a)] for r in rows) for a in range(5)}}
+        if all('safety_events' in r for r in rows):
+            summary['policies'][name]['safety_summary'] = summarize_safety(
+                [event for r in rows for event in r['safety_events']])
     if 'llm' in results:
         summary['llm_paired_comparisons'] = {}
         llm = np.array([r['score_mph'] for r in results['llm']])

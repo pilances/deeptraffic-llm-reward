@@ -15,6 +15,7 @@ from deeptraffic_llm_reward.llm_policy import LLMPolicyAdapter
 from deeptraffic_llm_reward.llm_state import prepare_llm_request
 from deeptraffic_llm_reward.llm_compact import prepare_compact_request
 from deeptraffic_llm_reward.policies import RuleBasedPolicy
+from deeptraffic_llm_reward.safety_metrics import format_safety_table
 
 
 def main():
@@ -22,8 +23,8 @@ def main():
     parser.add_argument('--out', type=Path)
     parser.add_argument('--compact', action='store_true', help='Use semantic LLM input and a separate LLM observation window')
     parser.add_argument('--llm-lanes-side', type=int, default=3)
-    parser.add_argument('--llm-patches-ahead', type=int, default=40)
-    parser.add_argument('--llm-patches-behind', type=int, default=5)
+    parser.add_argument('--llm-patches-ahead', type=int, default=52)
+    parser.add_argument('--llm-patches-behind', type=int, default=10)
     parser.add_argument('--frames', type=int, default=200)
     parser.add_argument('--seeds', type=int, nargs='+', default=[2000100, 2000101, 2000102])
     parser.add_argument('--checkpoint', type=Path,
@@ -58,12 +59,13 @@ def main():
         version = json.load(response)
     source_root = Path(__file__).resolve().parents[1]
     sources = ['scripts/evaluate_llm.py'] + ['src/deeptraffic_llm_reward/'+n+'.py'
-        for n in ('env', 'backend', 'evaluation', 'policies', 'llm_policy', 'llm_state', 'llm_compact', 'llm_action', 'llm_client')]
+        for n in ('env', 'backend', 'evaluation', 'policies', 'llm_policy', 'llm_state', 'llm_compact', 'llm_action', 'llm_client', 'safety_metrics')]
     contract = {'config': asdict(config), 'scenario_seeds': args.seeds,
         'client': asdict(client), 'model_digest': model['digest'], 'server_version': version,
         'checkpoint_sha256': hashlib.sha256(checkpoint).hexdigest(), 'backend_revision': REVISION,
         'sources_sha256': {p: hashlib.sha256((source_root/p).read_bytes()).hexdigest() for p in sources},
         'llm_config': asdict(llm_config), 'compact': args.compact,
+        'llm_native_lane_status': args.compact,
         'prompt_sha256': prepare_request(np.ones((2*llm_config.lanes_side+1)*
             (llm_config.patches_ahead+llm_config.patches_behind), dtype=np.float32), llm_config)['prompt_sha256'],
         'target_mph': 76.6, 'exploration': False, 'fallback': 'raise',
@@ -80,7 +82,8 @@ def main():
         (args.out/'checkpoint.json').write_bytes(checkpoint)
     policies = {'dqn_submission': lambda obs: int(np.argmax(weights @ obs.astype(np.float64) + biases)),
                 'rule': RuleBasedPolicy(6, 52, 0).act,
-                'llm': LLMPolicyAdapter(llm_config, client, on_invalid='raise', prepare_request=prepare_request)}
+                'llm': LLMPolicyAdapter(llm_config, client, on_invalid='raise', prepare_request=prepare_request,
+                                        include_lane_status=args.compact)}
     results = {}
     progress = {'status': 'running', 'completed': {}}
     try:
@@ -94,6 +97,7 @@ def main():
                 progress['completed'][name].append(result)
                 (args.out/'progress.json').write_text(json.dumps(progress, indent=2))
                 print(f'{name} seed={seed}: {result["score_mph"]:.2f} mph', flush=True)
+                print(format_safety_table({f'{name} / {seed}': result['safety_summary']}), flush=True)
         summary = summarize_matched(results, frames=args.frames)
         summary['scenario_seeds'] = args.seeds
         summary['observation_configs'] = {'dqn_submission': asdict(config), 'rule': asdict(config), 'llm': asdict(llm_config)}
@@ -101,6 +105,8 @@ def main():
         summary['interpretation'] = ('Exploratory short-horizon comparison; historical target is contextual only'
             if args.frames != 2000 else 'Small matched sample; different scenario protocol from historical 500-run target')
         (args.out/'comparison.json').write_text(json.dumps(summary, indent=2))
+        (args.out/'safety_overview.md').write_text(format_safety_table(
+            {name: row['safety_summary'] for name, row in summary['policies'].items()}))
         progress['status'] = 'complete'
         print(json.dumps(summary, indent=2), flush=True)
     except BaseException as exc:

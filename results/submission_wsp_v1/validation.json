@@ -1,0 +1,67 @@
+{
+  "synthetic_only": true,
+  "rng_seed": 20261116,
+  "real_simulator_runs": 0,
+  "semantic_mapping_verified": false,
+  "exact_changed_weights": 4,
+  "exact_changed_biases": 0,
+  "all_other_fields_equal": true,
+  "finite_parameters": true,
+  "analytical_delta_test_vectors": 4096,
+  "analytical_delta_max_abs_error": 2.6555146970252963e-14,
+  "equal_triplet_test_vectors": 1024,
+  "equal_triplet_max_abs_delta": 6.9136106724449926e-18,
+  "unit_box_corner_cases": 8,
+  "max_pairwise_delta_at_corners": 0.1,
+  "synthetic_states_with_baseline_margin_gt_point_one": 3797,
+  "changes_on_those_states": 0,
+  "weight_delta_frobenius": 0.20000000000000018,
+  "weight_delta_fraction_of_baseline_frobenius": 0.012164881988431967,
+  "not_evaluated": [
+    "average speed",
+    "lane-change completion",
+    "chattering",
+    "safety-system overrides",
+    "real high-speed behavior"
+  ],
+  "convnetjs_runtime_check": {
+    "passed": true,
+    "independent_numpy_reference": true,
+    "synthetic_input_vectors": 48,
+    "maximum_absolute_q_error": 1.5631940186722204e-13,
+    "both_models_fromJSON_loaded": true,
+    "simulator_executed": false,
+    "sources": [
+      {
+        "file": "convnet_util.js",
+        "sha256": "08c9be88f38e271641aae2dfe4e7fc16b23bb6bc6fe4ceee80817a4e153b3d91",
+        "url": "https://raw.githubusercontent.com/karpathy/convnetjs/master/src/convnet_util.js"
+      },
+      {
+        "file": "convnet_vol.js",
+        "sha256": "bb26ad838bb5b0f36946774bb6fc84e52d440c8f820f0fc06c7801c19c5e0591",
+        "url": "https://raw.githubusercontent.com/karpathy/convnetjs/master/src/convnet_vol.js"
+      },
+      {
+        "file": "convnet_layers_input.js",
+        "sha256": "539c6ec6d7a6d8d2980643ba78338a94e37b1585bd59bc92646770ad5b8ff950",
+        "url": "https://raw.githubusercontent.com/karpathy/convnetjs/master/src/convnet_layers_input.js"
+      },
+      {
+        "file": "convnet_layers_dotproducts.js",
+        "sha256": "0f2779984b8abfc80344e4f95769fb4aab8eae00f207fa5a378f2e576c4a2301",
+        "url": "https://raw.githubusercontent.com/karpathy/convnetjs/master/src/convnet_layers_dotproducts.js"
+      },
+      {
+        "file": "convnet_layers_loss.js",
+        "sha256": "7cc30517ef39832e629b5d037e88b2ebda8cdfa0f7e2081086727864e3e736b9",
+        "url": "https://raw.githubusercontent.com/karpathy/convnetjs/master/src/convnet_layers_loss.js"
+      },
+      {
+        "file": "convnet_net.js",
+        "sha256": "4fd490be4f1e83fc068fe704333d9eef2122f62b9b772c43162608ad9091f8c3",
+        "url": "https://raw.githubusercontent.com/karpathy/convnetjs/master/src/convnet_net.js"
+      }
+    ]
+  }
+}

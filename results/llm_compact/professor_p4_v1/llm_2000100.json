@@ -1,0 +1,136 @@
+{
+  "seed": 2000100,
+  "frames": 200,
+  "decisions": 7,
+  "initial_state_sha256": "7f324c29a79646d42dba0c9d4e7febd935f29bfc4a529e497335e49a7d924a84",
+  "raw_mean_speed_mph": 74.1,
+  "initial_traffic_sha256": "1f7f1b0023313a5c15ec687a1a4e0d9b3f451c252aa1a97e53fe9847db9c5cc8",
+  "score_mph": 74.09,
+  "agent_mean_speed_mph": {
+    "0": 74.1
+  },
+  "action_counts": {
+    "0": 0,
+    "1": 4,
+    "2": 0,
+    "3": 1,
+    "4": 2
+  },
+  "fallback_count": 0,
+  "original_decision_seconds": 17.271971959,
+  "execution_seconds": 17.37249525,
+  "replayed_decisions": 0,
+  "safety_summary": {
+    "decision_commands": {
+      "lane_change": {
+        "requested": 3,
+        "accepted": 2,
+        "rejected": 1,
+        "rejected_percent": 33.333333333333336,
+        "rejection_reasons": {
+          "target_region_blocked": 1
+        }
+      },
+      "accelerate": {
+        "requested": 4,
+        "rejected_by_safety": 0,
+        "throttle_increased": 0,
+        "at_throttle_cap": 4,
+        "safety_limited_at_request": 0,
+        "fully_stopped_at_request": 0
+      }
+    },
+    "all_action_applications": {
+      "lane_change": {
+        "requested": 3,
+        "accepted": 2,
+        "rejected": 1,
+        "rejected_percent": 33.333333333333336,
+        "rejection_reasons": {
+          "target_region_blocked": 1
+        }
+      },
+      "accelerate": {
+        "requested": 4,
+        "rejected_by_safety": 0,
+        "throttle_increased": 0,
+        "at_throttle_cap": 4,
+        "safety_limited_at_request": 0,
+        "fully_stopped_at_request": 0
+      }
+    }
+  },
+  "safety_events": [
+    {
+      "frame": 0,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 0.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 30,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 60,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 90,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 120,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 150,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 180,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    }
+  ]
+}

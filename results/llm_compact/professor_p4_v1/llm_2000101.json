@@ -1,0 +1,83 @@
+{
+  "seed": 2000101,
+  "frames": 200,
+  "decisions": 7,
+  "initial_state_sha256": "5cfab9589504b70f3eb94b7ed64465f9ff8ef0a3a249bb32949ccd094642ea11",
+  "raw_mean_speed_mph": 51.60995185599674,
+  "initial_traffic_sha256": "220661ced6b59674d3d3af386137191880f09f9c3a895e8ad425e5d4cb10878c",
+  "score_mph": 51.6,
+  "agent_mean_speed_mph": {
+    "0": 51.60995185599674
+  },
+  "action_counts": {
+    "0": 5,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 2
+  },
+  "fallback_count": 0,
+  "original_decision_seconds": 6.0731824150000016,
+  "execution_seconds": 6.149103915999998,
+  "replayed_decisions": 0,
+  "safety_summary": {
+    "decision_commands": {
+      "lane_change": {
+        "requested": 2,
+        "accepted": 0,
+        "rejected": 2,
+        "rejected_percent": 100.0,
+        "rejection_reasons": {
+          "target_region_blocked": 2
+        }
+      },
+      "accelerate": {
+        "requested": 0,
+        "rejected_by_safety": 0,
+        "throttle_increased": 0,
+        "at_throttle_cap": 0,
+        "safety_limited_at_request": 0,
+        "fully_stopped_at_request": 0
+      }
+    },
+    "all_action_applications": {
+      "lane_change": {
+        "requested": 2,
+        "accepted": 0,
+        "rejected": 2,
+        "rejected_percent": 100.0,
+        "rejection_reasons": {
+          "target_region_blocked": 2
+        }
+      },
+      "accelerate": {
+        "requested": 0,
+        "rejected_by_safety": 0,
+        "throttle_increased": 0,
+        "at_throttle_cap": 0,
+        "safety_limited_at_request": 0,
+        "fully_stopped_at_request": 0
+      }
+    }
+  },
+  "safety_events": [
+    {
+      "frame": 0,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 30,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    }
+  ]
+}

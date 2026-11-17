@@ -13,6 +13,7 @@ import gymnasium as gym
 import numpy as np
 from gymnasium import spaces
 from .backend import engine_class, REVISION
+from .safety_metrics import observe_actions, summarize_safety, lane_change_status
 
 class Action(IntEnum):
     MAINTAIN = 0
@@ -82,6 +83,9 @@ class DeepTrafficEnv(gym.Env):
         anchor = int(seed) if seed is not None else int(self.np_random.integers(0, 2**31-2))
         self._eng.r = self._eng.t = anchor
         self._eng.reset()
+        self._safety_events = []
+        self._last_safety_event = 0
+        observe_actions(self._eng, self._safety_events)
         self._actions, self._events = Queue(), Queue()
         self._sum = 0.0
         self._agent_speed_sums = {agent: 0.0 for agent in self.controlled_agent_ids}
@@ -140,7 +144,12 @@ class DeepTrafficEnv(gym.Env):
             'episode_mean_speed_mph': self._sum/max(1, self._frames),
             'reward_objective': self.reward_objective,
             'environment_version': '0.4.0', 'backend_revision': REVISION}
+        info['safety_events'] = self._safety_events[self._last_safety_event:]
+        if agent is not None:
+            info['lane_change_status'] = lane_change_status(self._eng, agent)
+        self._last_safety_event = len(self._safety_events)
         if self._done:
+            info['safety_summary'] = summarize_safety(self._safety_events)
             # Only a closing snapshot, never presented as a new decision. Keep
             # the native engine grid semantics (same as ego_state()).
             final_states = {}

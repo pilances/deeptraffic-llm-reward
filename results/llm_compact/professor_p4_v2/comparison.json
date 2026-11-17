@@ -1,0 +1,70 @@
+{
+  "frames": 200,
+  "historical_target_mph": 76.6,
+  "historical_protocol_match": false,
+  "policies": {
+    "llm": {
+      "scores_mph": [
+        74.82,
+        71.72,
+        75.57
+      ],
+      "median_mph": 74.82,
+      "mean_mph": 74.03666666666666,
+      "min_mph": 71.72,
+      "max_mph": 75.57,
+      "delta_to_historical_target_mph": -1.7800000000000011,
+      "decisions": 201,
+      "fallback_count": 0,
+      "decision_seconds": 392.2620557019999,
+      "action_counts": {
+        "0": 0,
+        "1": 183,
+        "2": 0,
+        "3": 15,
+        "4": 3
+      },
+      "safety_summary": {
+        "decision_commands": {
+          "lane_change": {
+            "requested": 18,
+            "accepted": 18,
+            "rejected": 0,
+            "rejected_percent": 0.0,
+            "rejection_reasons": {}
+          },
+          "accelerate": {
+            "requested": 183,
+            "rejected_by_safety": 0,
+            "throttle_increased": 91,
+            "at_throttle_cap": 92,
+            "safety_limited_at_request": 11,
+            "fully_stopped_at_request": 0
+          }
+        },
+        "all_action_applications": {
+          "lane_change": {
+            "requested": 89,
+            "accepted": 30,
+            "rejected": 59,
+            "rejected_percent": 66.29213483146067,
+            "rejection_reasons": {
+              "off_road": 6,
+              "target_region_blocked": 39,
+              "not_centered": 14
+            }
+          },
+          "accelerate": {
+            "requested": 1219,
+            "rejected_by_safety": 0,
+            "throttle_increased": 420,
+            "at_throttle_cap": 799,
+            "safety_limited_at_request": 102,
+            "fully_stopped_at_request": 6
+          }
+        }
+      }
+    }
+  },
+  "llm_paired_comparisons": {}
+}

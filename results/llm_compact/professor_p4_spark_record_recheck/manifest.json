@@ -1,0 +1,61 @@
+{
+  "config": {
+    "lanes_side": 3,
+    "patches_ahead": 40,
+    "patches_behind": 5,
+    "other_agents": 10,
+    "episode_frames": 2000
+  },
+  "client": {
+    "base_url": "http://127.0.0.1:11436",
+    "model": "qwen3:8b",
+    "timeout_seconds": 180.0,
+    "keep_alive_seconds": 300
+  },
+  "seeds": [
+    2000100,
+    2000101,
+    2000102,
+    2000103,
+    2000104,
+    2000105,
+    2000106,
+    2000107,
+    2000108,
+    2000109,
+    2000110,
+    2000111,
+    2000112,
+    2000113,
+    2000114,
+    2000115
+  ],
+  "backend_revision": "acd7c2c9157f5b480e15cf0bcd2c793de45c5b68",
+  "original_professor_system_prompt": "You control one car on a seven-lane highway. Maximize the controlled fleet's average speed.\n\nUse only these actions:\n- ACCELERATE\n- CHANGE_LEFT\n- CHANGE_RIGHT\n\nNever choose DECELERATE or MAINTAIN.\n\nACCELERATE is the default action. If the current lane is not BLOCKED by a SLOW car CLOSE ahead, always choose ACCELERATE. A legal lane by itself is never a reason to change lanes.\n\nYou may change lanes only when all of these conditions hold:\n1. STATUS is BLOCKED.\n2. CURRENT is CENTERED.\n3. The chosen direction says CHANGE LEGAL.\n4. The target lane does not contain a SLOW car CLOSE ahead.\n5. The target lane does not contain a FAST car CLOSE behind.\n6. The target lane has at least 4 patches more forward distance than CURRENT.\n   An OPEN target lane qualifies only when CURRENT is not OPEN.\n\nIf any one of these conditions fails, that lane is forbidden.\n\nIf both adjacent lanes qualify, choose the lane with the larger forward distance. If their forward distances differ by fewer than 4 patches, prefer the lane closer to the center lane 4.\n\nIf STATUS is BLOCKED but no adjacent lane satisfies every condition, choose ACCELERATE and wait for a better gap.\n\nNever change lanes merely because:\n- a lane is legal,\n- a lane is closer to the center,\n- a vehicle is far behind,\n- the current lane contains a vehicle that is not SLOW and CLOSE.\n\nEvaluate LEFT and RIGHT independently. Never infer that one direction is preferable without comparing both.\n\nReturn only JSON with exactly these two keys:\n{\"reason\":\"one short sentence\",\"action\":\"accelerate\"}\n\nThe action value must be one of the currently available actions. Do not output explanations or additional keys.",
+  "prompt_version": "professor-p4-record-frozen",
+  "variant": "record",
+  "thresholds": {
+    "FAST": 70,
+    "NEAR": 14,
+    "REAR_NEAR": 5,
+    "REAR_FAST": 62
+  },
+  "cache": "exact messages, valid responses only, in-memory",
+  "temperature": 0,
+  "sources_sha256": {
+    "evaluate_professor.py": "230d08d43cab57c104264cee56f5a64e01cfec2b3ecfc4d36f7f422c4d7acdda",
+    "llm_professor.py": "4d7c3f73b1fd5abbe7e869207ea8f18b6ff1255ed937bb166ae33a9d9d069c62",
+    "llm_professor_record.py": "60ea7b501d1b1dd167131add57804f3e045534fa86fd0875997aa9364eb5f759",
+    "llm_professor_useful.py": "12257a2907bda66c87a76d74dfa869349f53b9133a38b11972982112d7742e84",
+    "llm_policy.py": "149c9c7ca74b84c2d382251506f530a1ab50d0d97cb79d9f5fdfbe17d27006aa",
+    "llm_client.py": "6e8cde12751bcd71f1f98493105136a592a596410294b5a3d8cfb9f622e2c9d1",
+    "env.py": "99245d21a9522560c33ba52b1db87834221b3ecc229ed121c14e263585f1e10c",
+    "evaluation.py": "9d94f2832871f26a35050754276c46e618831f0a73fa253fe079c5a37d95255d",
+    "backend.py": "02b4fd826d1ef4635b7d38e5cf13935c6f4f524f5f30175aeb10db04bda4bb06",
+    "safety_metrics.py": "81d0b39293b93d6b0b233aee80a69bd360d8f49676e6b6c9c4f9f47eff438ded"
+  },
+  "reconstruction": "Visible P4 text transcribed; decoder reconstructed, not original professor source",
+  "native_lane_status": true,
+  "action_mask": "native gate + constrained JSON action enum; strict validation",
+  "protocol": "independent seeded episodes; controlled fleet speed, native scheduling; not historical competition protocol"
+}

@@ -1,0 +1,94 @@
+{
+  "contract": {
+    "config": {
+      "lanes_side": 6,
+      "patches_ahead": 52,
+      "patches_behind": 0,
+      "other_agents": 10,
+      "episode_frames": 200
+    },
+    "scenario_seeds": [
+      2000100,
+      2000101,
+      2000102
+    ],
+    "client": {
+      "base_url": "http://localhost:11434",
+      "model": "qwen3:8b",
+      "timeout_seconds": 180.0,
+      "keep_alive_seconds": 300
+    },
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "server_version": {
+      "version": "0.40.16"
+    },
+    "checkpoint_sha256": "dba1846eacc50a2c9581391ae3b18ac45191565656651ead4c842b09753d03de",
+    "backend_revision": "acd7c2c9157f5b480e15cf0bcd2c793de45c5b68",
+    "sources_sha256": {
+      "scripts/evaluate_llm.py": "ed31edb6b082ccb8e046c08e1f63fb33c1f89b92fe32b81b9b9439a9dd5ceb17",
+      "src/deeptraffic_llm_reward/env.py": "99245d21a9522560c33ba52b1db87834221b3ecc229ed121c14e263585f1e10c",
+      "src/deeptraffic_llm_reward/backend.py": "02b4fd826d1ef4635b7d38e5cf13935c6f4f524f5f30175aeb10db04bda4bb06",
+      "src/deeptraffic_llm_reward/evaluation.py": "9d94f2832871f26a35050754276c46e618831f0a73fa253fe079c5a37d95255d",
+      "src/deeptraffic_llm_reward/policies.py": "3dab6008f0f42a6c758999b5ca9b0dd062093a381a2cfec14af83aee56bb7eb6",
+      "src/deeptraffic_llm_reward/llm_policy.py": "753c21ac757013eb4bec4b2bf47ea5a579705cc8f0e1c0173a834e9dcf78b070",
+      "src/deeptraffic_llm_reward/llm_state.py": "39ede149814769b6ae9fd421c900ac418a768287133482a1f7f18deb7cf8cdb8",
+      "src/deeptraffic_llm_reward/llm_compact.py": "11442f25c86b8932a5287f18bab5dd16e68f082f5eea1be6b509bdf87f819d04",
+      "src/deeptraffic_llm_reward/llm_action.py": "00f0db3f1337b7592b335ee6432bb249d51905d63f831adc7e28543c9aa134bb",
+      "src/deeptraffic_llm_reward/llm_client.py": "fd7bb438ba1bb303479f2869a8564d8c65a500fac9bf74cae268ff7920eb0b4e",
+      "src/deeptraffic_llm_reward/safety_metrics.py": "49d67f3282d2425e504fc935ee0f8a55046bc6706b77e4455847cf673ce7fb7a"
+    },
+    "llm_config": {
+      "lanes_side": 3,
+      "patches_ahead": 52,
+      "patches_behind": 10,
+      "other_agents": 10,
+      "episode_frames": 200
+    },
+    "compact": true,
+    "llm_native_lane_status": true,
+    "prompt_sha256": "e8f5375b33b904ccf163bce0b8ba7745570985d07af567f186dc3d17227d5de8",
+    "target_mph": 76.6,
+    "exploration": false,
+    "fallback": "raise",
+    "protocol": "fresh independently seeded Gym episodes; floored fleet mean; upper-middle median",
+    "controlled_vehicles": 11,
+    "decision_agent_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "created_utc": "2026-11-16T17:03:03.483614+00:00",
+  "installed_model": {
+    "name": "qwen3:8b",
+    "model": "qwen3:8b",
+    "modified_at": "2026-11-12T22:15:57.819074503+01:00",
+    "size": 5225388164,
+    "digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "8.2B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 40960,
+      "embedding_length": 4096,
+      "runner": "ggml"
+    },
+    "capabilities": [
+      "completion",
+      "tools",
+      "thinking"
+    ]
+  }
+}

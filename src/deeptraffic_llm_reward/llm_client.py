@@ -27,7 +27,7 @@ class OllamaClient:
         if type(self.keep_alive_seconds) is not int or self.keep_alive_seconds < 0:
             raise ValueError('keep_alive_seconds must be a nonnegative integer')
 
-    def chat(self, messages):
+    def chat(self, messages, *, response_schema=None):
         """Send exactly one POST, returning the full response without action parsing.
 
         No retries, history, fallback actions or implicit requests. Non-thinking,
@@ -39,7 +39,7 @@ class OllamaClient:
             raise ValueError('Require nonempty role/content messages')
         payload = {
             'model': self.model, 'messages': messages, 'stream': False,
-            'think': False, 'format': 'json', 'keep_alive': self.keep_alive_seconds,
+            'think': False, 'format': response_schema if response_schema is not None else 'json', 'keep_alive': self.keep_alive_seconds,
             'options': {'temperature': 0, 'seed': 42, 'num_predict': 64, 'num_ctx': 8192},
         }
         request = Request(self.base_url.rstrip('/')+'/api/chat',

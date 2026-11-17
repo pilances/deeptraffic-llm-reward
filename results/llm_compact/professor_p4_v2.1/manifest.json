@@ -1,0 +1,43 @@
+{
+  "config": {
+    "lanes_side": 3,
+    "patches_ahead": 40,
+    "patches_behind": 5,
+    "other_agents": 10,
+    "episode_frames": 2000
+  },
+  "client": {
+    "base_url": "http://localhost:11434",
+    "model": "qwen3:8b",
+    "timeout_seconds": 180.0,
+    "keep_alive_seconds": 300
+  },
+  "seeds": [
+    2000100
+  ],
+  "backend_revision": "acd7c2c9157f5b480e15cf0bcd2c793de45c5b68",
+  "original_professor_system_prompt": "You drive ONE car on a 7-lane highway; your score is your AVERAGE SPEED (top speed 80 mph). You auto-drive as fast as the road ahead allows.\nYour default action is ACCELERATE. Whenever your lane is OPEN or the car ahead is fast, accelerate \u2014 never 'maintain' (it wastes speed recovery) and never change lanes (a lane change costs speed unless it actually gets you past a slow car).\nIgnore cars behind you; never move aside for them.\nChange lanes ONLY to overtake when you are BLOCKED (a SLOW car CLOSE ahead in your lane). Pick an adjacent lane that is OPEN or whose nearest car is fast or far; NEVER move into a lane that also has a slow car close ahead, and never cut into a lane where a fast car is close behind. If both sides qualify, prefer the lane closer to the centre (lane 4).\nIf you are blocked and neither side qualifies, ease off briefly and wait for a gap.\nThink in one short sentence, then choose one action.",
+  "prompt_version": "professor-p4-v2",
+  "thresholds": {
+    "FAST": 70,
+    "NEAR": 14,
+    "REAR_NEAR": 5,
+    "REAR_FAST": 62
+  },
+  "cache": "exact messages, valid responses only, in-memory",
+  "temperature": 0,
+  "sources_sha256": {
+    "evaluate_professor.py": "53e7afa5264433d75fc3f038affaefd327855c439af2606ac474e26ee8f0a967",
+    "llm_professor.py": "9700a63740812cd604aa0ae7993190cd5975fb17017beaca6a0220ec8989dc8a",
+    "llm_policy.py": "149c9c7ca74b84c2d382251506f530a1ab50d0d97cb79d9f5fdfbe17d27006aa",
+    "llm_client.py": "6e8cde12751bcd71f1f98493105136a592a596410294b5a3d8cfb9f622e2c9d1",
+    "env.py": "99245d21a9522560c33ba52b1db87834221b3ecc229ed121c14e263585f1e10c",
+    "evaluation.py": "9d94f2832871f26a35050754276c46e618831f0a73fa253fe079c5a37d95255d",
+    "backend.py": "02b4fd826d1ef4635b7d38e5cf13935c6f4f524f5f30175aeb10db04bda4bb06",
+    "safety_metrics.py": "81d0b39293b93d6b0b233aee80a69bd360d8f49676e6b6c9c4f9f47eff438ded"
+  },
+  "reconstruction": "Visible P4 text transcribed; decoder reconstructed, not original professor source",
+  "native_lane_status": true,
+  "action_mask": "native gate + constrained JSON action enum; strict validation",
+  "protocol": "independent seeded episodes; controlled fleet speed, native scheduling; not historical competition protocol"
+}

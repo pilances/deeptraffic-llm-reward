@@ -1,0 +1,253 @@
+{
+  "frames": 200,
+  "historical_target_mph": 76.6,
+  "historical_protocol_match": false,
+  "policies": {
+    "dqn_submission": {
+      "scores_mph": [
+        73.74,
+        70.37,
+        68.5
+      ],
+      "median_mph": 70.37,
+      "mean_mph": 70.87,
+      "min_mph": 68.5,
+      "max_mph": 73.74,
+      "delta_to_historical_target_mph": -6.22999999999999,
+      "decisions": 201,
+      "fallback_count": 0,
+      "decision_seconds": 0.003179334000000228,
+      "action_counts": {
+        "0": 2,
+        "1": 98,
+        "2": 1,
+        "3": 48,
+        "4": 52
+      },
+      "safety_summary": {
+        "decision_commands": {
+          "lane_change": {
+            "requested": 100,
+            "accepted": 31,
+            "rejected": 69,
+            "rejected_percent": 69.0,
+            "rejection_reasons": {
+              "not_centered": 31,
+              "target_region_blocked": 37,
+              "off_road": 1
+            }
+          },
+          "accelerate": {
+            "requested": 98,
+            "rejected_by_safety": 0,
+            "throttle_increased": 69,
+            "at_throttle_cap": 29,
+            "safety_limited_at_request": 5,
+            "fully_stopped_at_request": 2
+          }
+        },
+        "all_action_applications": {
+          "lane_change": {
+            "requested": 705,
+            "accepted": 108,
+            "rejected": 597,
+            "rejected_percent": 84.68085106382979,
+            "rejection_reasons": {
+              "target_region_blocked": 309,
+              "not_centered": 229,
+              "off_road": 59
+            }
+          },
+          "accelerate": {
+            "requested": 585,
+            "rejected_by_safety": 0,
+            "throttle_increased": 340,
+            "at_throttle_cap": 245,
+            "safety_limited_at_request": 58,
+            "fully_stopped_at_request": 6
+          }
+        }
+      }
+    },
+    "rule": {
+      "scores_mph": [
+        74.32,
+        72.87,
+        75.39
+      ],
+      "median_mph": 74.32,
+      "mean_mph": 74.19333333333333,
+      "min_mph": 72.87,
+      "max_mph": 75.39,
+      "delta_to_historical_target_mph": -2.280000000000001,
+      "decisions": 201,
+      "fallback_count": 0,
+      "decision_seconds": 0.0021176670000011555,
+      "action_counts": {
+        "0": 0,
+        "1": 164,
+        "2": 0,
+        "3": 23,
+        "4": 14
+      },
+      "safety_summary": {
+        "decision_commands": {
+          "lane_change": {
+            "requested": 37,
+            "accepted": 18,
+            "rejected": 19,
+            "rejected_percent": 51.351351351351354,
+            "rejection_reasons": {
+              "not_centered": 9,
+              "target_region_blocked": 10
+            }
+          },
+          "accelerate": {
+            "requested": 164,
+            "rejected_by_safety": 0,
+            "throttle_increased": 88,
+            "at_throttle_cap": 76,
+            "safety_limited_at_request": 7,
+            "fully_stopped_at_request": 0
+          }
+        },
+        "all_action_applications": {
+          "lane_change": {
+            "requested": 193,
+            "accepted": 52,
+            "rejected": 141,
+            "rejected_percent": 73.05699481865285,
+            "rejection_reasons": {
+              "target_region_blocked": 93,
+              "off_road": 16,
+              "not_centered": 32
+            }
+          },
+          "accelerate": {
+            "requested": 1115,
+            "rejected_by_safety": 0,
+            "throttle_increased": 421,
+            "at_throttle_cap": 694,
+            "safety_limited_at_request": 86,
+            "fully_stopped_at_request": 8
+          }
+        }
+      }
+    },
+    "llm": {
+      "scores_mph": [
+        73.93,
+        69.25,
+        71.25
+      ],
+      "median_mph": 71.25,
+      "mean_mph": 71.47666666666667,
+      "min_mph": 69.25,
+      "max_mph": 73.93,
+      "delta_to_historical_target_mph": -5.349999999999994,
+      "decisions": 201,
+      "fallback_count": 0,
+      "decision_seconds": 321.83594475300004,
+      "action_counts": {
+        "0": 0,
+        "1": 195,
+        "2": 0,
+        "3": 6,
+        "4": 0
+      },
+      "safety_summary": {
+        "decision_commands": {
+          "lane_change": {
+            "requested": 6,
+            "accepted": 6,
+            "rejected": 0,
+            "rejected_percent": 0.0,
+            "rejection_reasons": {}
+          },
+          "accelerate": {
+            "requested": 195,
+            "rejected_by_safety": 0,
+            "throttle_increased": 92,
+            "at_throttle_cap": 103,
+            "safety_limited_at_request": 32,
+            "fully_stopped_at_request": 3
+          }
+        },
+        "all_action_applications": {
+          "lane_change": {
+            "requested": 28,
+            "accepted": 14,
+            "rejected": 14,
+            "rejected_percent": 50.0,
+            "rejection_reasons": {
+              "off_road": 4,
+              "target_region_blocked": 10
+            }
+          },
+          "accelerate": {
+            "requested": 1280,
+            "rejected_by_safety": 0,
+            "throttle_increased": 422,
+            "at_throttle_cap": 858,
+            "safety_limited_at_request": 262,
+            "fully_stopped_at_request": 10
+          }
+        }
+      }
+    }
+  },
+  "llm_paired_comparisons": {
+    "dqn_submission": {
+      "scenario_deltas_mph": [
+        0.19000000000001194,
+        -1.1200000000000045,
+        2.75
+      ],
+      "mean_delta_mph": 0.6066666666666691,
+      "wins": 2,
+      "ties": 0,
+      "losses": 1
+    },
+    "rule": {
+      "scenario_deltas_mph": [
+        -0.38999999999998636,
+        -3.6200000000000045,
+        -4.140000000000001
+      ],
+      "mean_delta_mph": -2.7166666666666637,
+      "wins": 0,
+      "ties": 0,
+      "losses": 3
+    }
+  },
+  "scenario_seeds": [
+    2000100,
+    2000101,
+    2000102
+  ],
+  "observation_configs": {
+    "dqn_submission": {
+      "lanes_side": 6,
+      "patches_ahead": 52,
+      "patches_behind": 0,
+      "other_agents": 10,
+      "episode_frames": 200
+    },
+    "rule": {
+      "lanes_side": 6,
+      "patches_ahead": 52,
+      "patches_behind": 0,
+      "other_agents": 10,
+      "episode_frames": 200
+    },
+    "llm": {
+      "lanes_side": 3,
+      "patches_ahead": 52,
+      "patches_behind": 10,
+      "other_agents": 10,
+      "episode_frames": 200
+    }
+  },
+  "compact": true,
+  "interpretation": "Exploratory short-horizon comparison; historical target is contextual only"
+}

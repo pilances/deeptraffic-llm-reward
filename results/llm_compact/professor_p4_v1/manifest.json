@@ -1,0 +1,41 @@
+{
+  "config": {
+    "lanes_side": 3,
+    "patches_ahead": 40,
+    "patches_behind": 5,
+    "other_agents": 0,
+    "episode_frames": 200
+  },
+  "client": {
+    "base_url": "http://localhost:11434",
+    "model": "qwen3:8b",
+    "timeout_seconds": 180.0,
+    "keep_alive_seconds": 300
+  },
+  "seeds": [
+    2000100,
+    2000101,
+    2000102
+  ],
+  "backend_revision": "acd7c2c9157f5b480e15cf0bcd2c793de45c5b68",
+  "system_prompt": "You drive ONE car on a 7-lane highway; your score is your AVERAGE SPEED (top speed 80 mph). You auto-drive as fast as the road ahead allows.\nYour default action is ACCELERATE. Whenever your lane is OPEN or the car ahead is fast, accelerate \u2014 never 'maintain' (it wastes speed recovery) and never change lanes (a lane change costs speed unless it actually gets you past a slow car).\nIgnore cars behind you; never move aside for them.\nChange lanes ONLY to overtake when you are BLOCKED (a SLOW car CLOSE ahead in your lane). Pick an adjacent lane that is OPEN or whose nearest car is fast or far; NEVER move into a lane that also has a slow car close ahead, and never cut into a lane where a fast car is close behind. If both sides qualify, prefer the lane closer to the centre (lane 4).\nIf you are blocked and neither side qualifies, ease off briefly and wait for a gap.\nThink in one short sentence, then choose one action.",
+  "thresholds": {
+    "FAST": 70,
+    "NEAR": 14,
+    "REAR_NEAR": 5,
+    "REAR_FAST": 62
+  },
+  "cache": "exact messages, valid responses only, in-memory",
+  "temperature": 0,
+  "sources_sha256": {
+    "evaluate_professor.py": "af5b80cbd6334b884ff05caf7689340415fd4d1d8dec552d0e00f26336292e42",
+    "llm_professor.py": "d431127b3da62c0b840d73d6bcd44a756c994b6df5e715b6f2074a4cb4189605",
+    "llm_policy.py": "9dfad4c6074a38233453fb2ee42b16f7305421b67893a806199a626d1301906b",
+    "llm_client.py": "fd7bb438ba1bb303479f2869a8564d8c65a500fac9bf74cae268ff7920eb0b4e",
+    "env.py": "99245d21a9522560c33ba52b1db87834221b3ecc229ed121c14e263585f1e10c",
+    "evaluation.py": "9d94f2832871f26a35050754276c46e618831f0a73fa253fe079c5a37d95255d",
+    "backend.py": "02b4fd826d1ef4635b7d38e5cf13935c6f4f524f5f30175aeb10db04bda4bb06"
+  },
+  "reconstruction": "Visible P4 text transcribed; decoder reconstructed, not original professor source",
+  "protocol": "independent seeded episodes; current fleet metric equals controlled ego metric with one car"
+}

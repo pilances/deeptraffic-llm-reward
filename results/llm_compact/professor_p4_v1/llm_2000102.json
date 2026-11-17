@@ -1,0 +1,128 @@
+{
+  "seed": 2000102,
+  "frames": 200,
+  "decisions": 7,
+  "initial_state_sha256": "751352fdf3d21c1f851b2e70c55b690fc288265392a79fe1ea7e3e80d3e7fad3",
+  "raw_mean_speed_mph": 41.441703574826576,
+  "initial_traffic_sha256": "e438ce78eaf776871ba7fefe6c42429f5a90592006c39d0410ac92d30c91f1c7",
+  "score_mph": 41.44,
+  "agent_mean_speed_mph": {
+    "0": 41.441703574826576
+  },
+  "action_counts": {
+    "0": 0,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 7
+  },
+  "fallback_count": 0,
+  "original_decision_seconds": 10.909819167000002,
+  "execution_seconds": 11.009979625000003,
+  "replayed_decisions": 0,
+  "safety_summary": {
+    "decision_commands": {
+      "lane_change": {
+        "requested": 7,
+        "accepted": 0,
+        "rejected": 7,
+        "rejected_percent": 100.0,
+        "rejection_reasons": {
+          "target_region_blocked": 7
+        }
+      },
+      "accelerate": {
+        "requested": 0,
+        "rejected_by_safety": 0,
+        "throttle_increased": 0,
+        "at_throttle_cap": 0,
+        "safety_limited_at_request": 0,
+        "fully_stopped_at_request": 0
+      }
+    },
+    "all_action_applications": {
+      "lane_change": {
+        "requested": 7,
+        "accepted": 0,
+        "rejected": 7,
+        "rejected_percent": 100.0,
+        "rejection_reasons": {
+          "target_region_blocked": 7
+        }
+      },
+      "accelerate": {
+        "requested": 0,
+        "rejected_by_safety": 0,
+        "throttle_increased": 0,
+        "at_throttle_cap": 0,
+        "safety_limited_at_request": 0,
+        "fully_stopped_at_request": 0
+      }
+    }
+  },
+  "safety_events": [
+    {
+      "frame": 0,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 0.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 30,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 60,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.162556038645614,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 90,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.162556038645614,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 120,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.162556038645614,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 150,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.162556038645614,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 180,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.162556038645614,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    }
+  ]
+}

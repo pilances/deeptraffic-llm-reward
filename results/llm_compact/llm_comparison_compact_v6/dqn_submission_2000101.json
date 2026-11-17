@@ -1,0 +1,4310 @@
+{
+  "seed": 2000101,
+  "frames": 200,
+  "decisions": 67,
+  "initial_state_sha256": "2f93c1bdcccfbef7c2e734ba1db015646cdfbff316c1b266dccfe181615c0159",
+  "raw_mean_speed_mph": 70.37145800864609,
+  "initial_traffic_sha256": "4aafbe243260d8660fc14b42f5e7b3a74201c2daaa0602f11ae151bcc9232ae8",
+  "score_mph": 70.37,
+  "agent_mean_speed_mph": {
+    "0": 67.81122878703681,
+    "1": 65.68188527327602,
+    "2": 68.31557890751179,
+    "3": 71.36799999999995,
+    "4": 73.592,
+    "5": 73.34259896375474,
+    "6": 46.47874616352793,
+    "7": 76.19600000000003,
+    "8": 77.05999999999999,
+    "9": 77.12,
+    "10": 77.12
+  },
+  "action_counts": {
+    "0": 1,
+    "1": 30,
+    "2": 0,
+    "3": 16,
+    "4": 20
+  },
+  "fallback_count": 0,
+  "original_decision_seconds": 0.001065372999999925,
+  "execution_seconds": 0.09441925000000001,
+  "replayed_decisions": 0,
+  "safety_summary": {
+    "decision_commands": {
+      "lane_change": {
+        "requested": 36,
+        "accepted": 6,
+        "rejected": 30,
+        "rejected_percent": 83.33333333333333,
+        "rejection_reasons": {
+          "target_region_blocked": 20,
+          "not_centered": 9,
+          "off_road": 1
+        }
+      },
+      "accelerate": {
+        "requested": 30,
+        "rejected_by_safety": 0,
+        "throttle_increased": 22,
+        "at_throttle_cap": 8,
+        "safety_limited_at_request": 0,
+        "fully_stopped_at_request": 0
+      }
+    },
+    "all_action_applications": {
+      "lane_change": {
+        "requested": 233,
+        "accepted": 22,
+        "rejected": 211,
+        "rejected_percent": 90.55793991416309,
+        "rejection_reasons": {
+          "target_region_blocked": 137,
+          "off_road": 17,
+          "not_centered": 57
+        }
+      },
+      "accelerate": {
+        "requested": 194,
+        "rejected_by_safety": 0,
+        "throttle_increased": 116,
+        "at_throttle_cap": 78,
+        "safety_limited_at_request": 22,
+        "fully_stopped_at_request": 0
+      }
+    }
+  },
+  "safety_events": [
+    {
+      "frame": 0,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 3,
+      "agent_id": 1,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 3,
+      "agent_id": 2,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 3,
+      "agent_id": 3,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 3,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 3,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 3,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 3,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 3,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 3,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 3,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 3,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 6,
+      "agent_id": 2,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 6,
+      "agent_id": 3,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.5,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 6,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 6,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 6,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 6,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 6,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 6,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 6,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 6,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 12,
+      "agent_id": 4,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 12,
+      "agent_id": 5,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.1790944553716989,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 12,
+      "agent_id": 6,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 12,
+      "agent_id": 7,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 12,
+      "agent_id": 8,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 12,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 12,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 12,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 15,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 15,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 15,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 15,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 15,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 15,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 15,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 18,
+      "agent_id": 6,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 18,
+      "agent_id": 7,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 18,
+      "agent_id": 8,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 18,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 18,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 18,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 21,
+      "agent_id": 7,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 21,
+      "agent_id": 8,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 21,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 21,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 21,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 24,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 24,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 24,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 24,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 27,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 27,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 27,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 30,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 33,
+      "agent_id": 1,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 33,
+      "agent_id": 2,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 33,
+      "agent_id": 3,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 33,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 33,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 33,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 33,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 33,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 33,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 33,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 33,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 36,
+      "agent_id": 2,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 36,
+      "agent_id": 3,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 36,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 36,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 36,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.1592769809661168,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 36,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 36,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 36,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 36,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 36,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 39,
+      "agent_id": 3,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 39,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 39,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 39,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 39,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 39,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 39,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 39,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 39,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 42,
+      "agent_id": 4,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 42,
+      "agent_id": 5,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 42,
+      "agent_id": 6,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.1337983659998283,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 42,
+      "agent_id": 7,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 42,
+      "agent_id": 8,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 42,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 42,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 42,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 45,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 45,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.1337983659998283,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 45,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 45,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 45,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 45,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 45,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 48,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.1214744707172215,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 48,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 48,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 48,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 48,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 48,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 51,
+      "agent_id": 7,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 51,
+      "agent_id": 8,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 51,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 51,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 51,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 54,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 54,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 54,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 54,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 57,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 57,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 57,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 60,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 63,
+      "agent_id": 1,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 63,
+      "agent_id": 2,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 63,
+      "agent_id": 3,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 63,
+      "agent_id": 4,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 63,
+      "agent_id": 5,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 63,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.1214744707172215,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 63,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 63,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 63,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 63,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 63,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 66,
+      "agent_id": 2,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 66,
+      "agent_id": 3,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 66,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 66,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 66,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.1214744707172215,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 66,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 66,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 66,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 66,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 66,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 69,
+      "agent_id": 3,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 69,
+      "agent_id": 4,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 69,
+      "agent_id": 5,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 69,
+      "agent_id": 6,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.1094156054406923,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 69,
+      "agent_id": 7,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 69,
+      "agent_id": 8,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 69,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 69,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 69,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 72,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 72,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 72,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.1094156054406923,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 72,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 72,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 72,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 72,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 72,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 75,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 75,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0976133117657914,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 75,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 75,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 75,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 75,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 75,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 78,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.0860594874314144,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 78,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 78,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 78,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 78,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 78,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 81,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 81,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 81,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 81,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 81,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 84,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 84,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 84,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 84,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 87,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 87,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 87,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 90,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 1.0317565130598438,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 93,
+      "agent_id": 1,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 93,
+      "agent_id": 2,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 93,
+      "agent_id": 3,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 93,
+      "agent_id": 4,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 93,
+      "agent_id": 5,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 93,
+      "agent_id": 6,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.0860594874314144,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 93,
+      "agent_id": 7,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 93,
+      "agent_id": 8,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 93,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 93,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 93,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 96,
+      "agent_id": 2,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 96,
+      "agent_id": 3,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 96,
+      "agent_id": 4,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 96,
+      "agent_id": 5,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 96,
+      "agent_id": 6,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.0860594874314144,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 96,
+      "agent_id": 7,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 96,
+      "agent_id": 8,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 96,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 96,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 96,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 99,
+      "agent_id": 3,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 99,
+      "agent_id": 4,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 99,
+      "agent_id": 5,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 99,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0860594874314144,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 99,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 99,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 99,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 99,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 99,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 102,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 102,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 102,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0860594874314144,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 102,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 102,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 102,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 102,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 102,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 105,
+      "agent_id": 5,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 105,
+      "agent_id": 6,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.0747463677706706,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 105,
+      "agent_id": 7,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 105,
+      "agent_id": 8,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 105,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 105,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 105,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 108,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.0747463677706706,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 108,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 108,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 108,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 108,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 108,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 111,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 111,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 111,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 111,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 111,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 114,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 114,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 114,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 114,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 117,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 117,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 117,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 120,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 123,
+      "agent_id": 1,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 123,
+      "agent_id": 2,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 123,
+      "agent_id": 3,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 123,
+      "agent_id": 4,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 123,
+      "agent_id": 5,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 123,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0747463677706706,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 123,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 123,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 123,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 123,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 123,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 126,
+      "agent_id": 2,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 126,
+      "agent_id": 3,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 126,
+      "agent_id": 4,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 126,
+      "agent_id": 5,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 126,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0747463677706706,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 126,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 126,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 126,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 126,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 126,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 129,
+      "agent_id": 3,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 129,
+      "agent_id": 4,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 129,
+      "agent_id": 5,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 129,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0747463677706706,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 129,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 129,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 129,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 129,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 129,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 132,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 132,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 132,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0747463677706706,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 132,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 132,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 132,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 132,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 132,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 135,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 135,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0636665083091172,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 135,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 135,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 135,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 135,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 135,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 138,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.0528127684284119,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 138,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 138,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 138,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 138,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 138,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 141,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 141,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 141,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 141,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 141,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 144,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 144,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 144,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 144,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 147,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 147,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 147,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 150,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 153,
+      "agent_id": 1,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 153,
+      "agent_id": 2,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 153,
+      "agent_id": 3,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 153,
+      "agent_id": 4,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 153,
+      "agent_id": 5,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 153,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0528127684284119,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 153,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 153,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 153,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 153,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 153,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 156,
+      "agent_id": 2,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 156,
+      "agent_id": 3,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 156,
+      "agent_id": 4,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 156,
+      "agent_id": 5,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 156,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0528127684284119,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 156,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 156,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 156,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 156,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 156,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 159,
+      "agent_id": 3,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 159,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 159,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 159,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0528127684284119,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 159,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 159,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 159,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 159,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 159,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 162,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 162,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 162,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.042178296020044,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 162,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 162,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 162,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 162,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 162,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 165,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 165,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 165,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 165,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 165,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 165,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 165,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 168,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 0.7738173847948828,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 168,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 168,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 168,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 168,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 168,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 171,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 171,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 171,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 171,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 171,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 174,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 174,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 174,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 174,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 177,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 177,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 177,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 180,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 183,
+      "agent_id": 1,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.1377897454135346,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 183,
+      "agent_id": 2,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.2604997241191251,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 183,
+      "agent_id": 3,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 183,
+      "agent_id": 4,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 183,
+      "agent_id": 5,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 183,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 183,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 183,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 183,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 183,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 183,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 186,
+      "agent_id": 2,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 1.2604997241191251,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 186,
+      "agent_id": 3,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 186,
+      "agent_id": 4,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 186,
+      "agent_id": 5,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "off_road"
+    },
+    {
+      "frame": 186,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 186,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 186,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 186,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 186,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 186,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 189,
+      "agent_id": 3,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 189,
+      "agent_id": 4,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 189,
+      "agent_id": 5,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 189,
+      "agent_id": 6,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 1.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 189,
+      "agent_id": 7,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 189,
+      "agent_id": 8,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 189,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 189,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 189,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 192,
+      "agent_id": 4,
+      "action": 1,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "throttle_increased": true,
+      "at_throttle_cap": false,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 192,
+      "agent_id": 5,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 192,
+      "agent_id": 6,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": true,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 192,
+      "agent_id": 7,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 192,
+      "agent_id": 8,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 192,
+      "agent_id": 9,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 192,
+      "agent_id": 10,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 192,
+      "agent_id": 0,
+      "action": 1,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "throttle_increased": false,
+      "at_throttle_cap": true,
+      "safety_limited": false,
+      "fully_stopped_by_safety": false
+    },
+    {
+      "frame": 195,
+      "agent_id": 5,
+      "action": 4,
+      "decision_command": true,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 195,
+      "agent_id": 6,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 1.0317565130598438,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 195,
+      "agent_id": 7,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 195,
+      "agent_id": 8,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 195,
+      "agent_id": 9,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 195,
+      "agent_id": 10,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 195,
+      "agent_id": 0,
+      "action": 4,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    },
+    {
+      "frame": 198,
+      "agent_id": 6,
+      "action": 3,
+      "decision_command": true,
+      "safety_factor": 1.0317565130598438,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 198,
+      "agent_id": 7,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 198,
+      "agent_id": 8,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": true,
+      "rejection_reason": null
+    },
+    {
+      "frame": 198,
+      "agent_id": 9,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 198,
+      "agent_id": 10,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "target_region_blocked"
+    },
+    {
+      "frame": 198,
+      "agent_id": 0,
+      "action": 3,
+      "decision_command": false,
+      "safety_factor": 2.0,
+      "accepted": false,
+      "rejection_reason": "not_centered"
+    }
+  ]
+}

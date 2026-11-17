@@ -1,0 +1,80 @@
+{
+  "status": "experimental_candidate_not_simulation_validated",
+  "hypothesis": "Strengthen existing output-3/4 preference for adjacent-cell value relative to center-cell value.",
+  "source_file": "checkpoint.json",
+  "source_sha256": "dba1846eacc50a2c9581391ae3b18ac45191565656651ead4c842b09753d03de",
+  "candidate_file": "checkpoint.candidate.json",
+  "candidate_sha256": "e52b39ca2acfc1b29fd71227b041556e16660b19b4eb329e8053f02695866251",
+  "alpha": 0.1,
+  "weights_total": 3380,
+  "biases_total": 5,
+  "weights_changed": 4,
+  "biases_changed": 0,
+  "changes": [
+    {
+      "path": "/layers/1/filters/3/w/668",
+      "action": 3,
+      "feature": 668,
+      "before": 1.9899741594965055,
+      "after": 2.0899741594965056,
+      "delta": 0.10000000000000009
+    },
+    {
+      "path": "/layers/1/filters/3/w/669",
+      "action": 3,
+      "feature": 669,
+      "before": 1.3285861001113697,
+      "after": 1.2285861001113696,
+      "delta": -0.10000000000000009
+    },
+    {
+      "path": "/layers/1/filters/4/w/669",
+      "action": 4,
+      "feature": 669,
+      "before": 1.4215252515419985,
+      "after": 1.3215252515419984,
+      "delta": -0.10000000000000009
+    },
+    {
+      "path": "/layers/1/filters/4/w/670",
+      "action": 4,
+      "feature": 670,
+      "before": 2.1537177276454944,
+      "after": 2.2537177276454945,
+      "delta": 0.10000000000000009
+    }
+  ],
+  "semantics_not_verified": {
+    "output_3": "assumed left",
+    "output_4": "assumed right",
+    "input_668": "assumed left near-row cell",
+    "input_669": "assumed center near-row cell",
+    "input_670": "assumed right near-row cell",
+    "feature_encoding": "higher is assumed to mean greater attainable speed; actual normalization and index order must be checked"
+  },
+  "matched_published_checkpoint": {
+    "url": "https://github.com/jnorthrup/deeptraffic/blob/master/mph7585.js",
+    "all_json_fields_equal": true,
+    "lanesSide": 6,
+    "patchesAhead": 52,
+    "patchesBehind": 0,
+    "temporal_window": 0,
+    "otherAgents": 10,
+    "epsilon_test_time": 0
+  },
+  "certified_properties": {
+    "delta_Q3": "0.1*(x[668]-x[669])",
+    "delta_Q4": "0.1*(x[670]-x[669])",
+    "delta_Q0_Q1_Q2": 0,
+    "equal_triplet": "all Q-values unchanged in exact arithmetic",
+    "pairwise_margin_shift_bound": "alpha*(upper_bound-lower_bound), provided all three changed features lie in this interval",
+    "high_speed_dynamic_stability": "not certified"
+  },
+  "evaluation": {
+    "simulator_runs": 0,
+    "failure_traces_supplied": 0,
+    "measured_mph_before": null,
+    "measured_mph_after": null
+  },
+  "rollback": "Use the untouched original checkpoint or replace each changed parameter with its before value."
+}
